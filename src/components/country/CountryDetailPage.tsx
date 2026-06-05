@@ -105,8 +105,23 @@ export function CountryDetailPage({ data }: CountryDetailPageProps) {
           label="Country Alpha"
           value={s.country_alpha}
           percentile={s.country_alpha !== null ? Math.min(99, Math.max(1, 50 + (s.country_alpha * 25))) : null}
-          detail="vs Global Benchmark"
+          detail="Asset Score vs Global"
         />
+      </div>
+
+      {/* Alpha Attribution */}
+      <div className="glass-card-static" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.25rem' }}>
+        <div style={{ fontSize: '0.6875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-tertiary)', marginBottom: '1rem' }}>
+          Alpha Attribution — Asset Score vs Peer Benchmarks
+        </div>
+        <div className="grid-3" style={{ gap: '0.75rem' }}>
+          <AlphaResidualCard label="vs Global" value={s.alpha_vs_global} group={country.peer_benchmarks.global.group_name} size={country.peer_benchmarks.global.group_size} />
+          <AlphaResidualCard label="vs Region" value={s.alpha_vs_region} group={country.peer_benchmarks.region.group_name} size={country.peer_benchmarks.region.group_size} />
+          <AlphaResidualCard label="vs Dev Stage" value={s.alpha_vs_development_stage} group={country.peer_benchmarks.development_stage.group_name} size={country.peer_benchmarks.development_stage.group_size} />
+          <AlphaResidualCard label="vs Role" value={s.alpha_vs_global_role} group={country.peer_benchmarks.global_role.group_name} size={country.peer_benchmarks.global_role.group_size} />
+          <AlphaResidualCard label="vs Openness" value={s.alpha_vs_openness} group={country.peer_benchmarks.openness_type.group_name} size={country.peer_benchmarks.openness_type.group_size} />
+          <AlphaResidualCard label="vs Ext. Vuln." value={s.alpha_vs_external_vulnerability} group={country.peer_benchmarks.external_vulnerability.group_name} size={country.peer_benchmarks.external_vulnerability.group_size} />
+        </div>
       </div>
 
       {/* Asset Panel */}
@@ -447,4 +462,29 @@ function isMacroStale(lastUpdated: string | null): boolean {
   if (year === null) return false
   const currentYear = new Date().getFullYear()
   return (currentYear - year) >= 2
+}
+
+function AlphaResidualCard({ label, value, group, size }: { label: string; value: number | null; group: string; size: number }) {
+  const color = value === null ? 'var(--text-tertiary)'
+    : value > 0.3 ? 'var(--color-strong)'
+    : value > 0 ? '#38bdf8'
+    : value > -0.3 ? '#f59e0b'
+    : 'var(--color-weak)';
+  const sign = value !== null && value > 0 ? '+' : '';
+  return (
+    <div style={{
+      padding: '0.75rem 1rem', background: 'var(--bg-card)',
+      borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)',
+    }}>
+      <div style={{ fontSize: '0.6875rem', color: 'var(--text-tertiary)', marginBottom: '0.375rem', fontWeight: 600 }}>
+        {label}
+      </div>
+      <div style={{ fontSize: '1.25rem', fontWeight: 800, color, fontVariantNumeric: 'tabular-nums' }}>
+        {value !== null ? `${sign}${value.toFixed(3)}` : '—'}
+      </div>
+      <div style={{ fontSize: '0.5625rem', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
+        {group} ({size} countries)
+      </div>
+    </div>
+  )
 }

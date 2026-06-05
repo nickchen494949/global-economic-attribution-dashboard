@@ -175,12 +175,68 @@ function adaptCountry(rc: RawCountry, benchmarks: RawPipelineData['benchmarks'])
   const riskZ = riskFactors.length > 0 ? riskFactors.reduce((a, b) => a + b, 0) / riskFactors.length : curZ;
   const riskScore = makeScore(riskZ, riskFactors.length || (curZ !== null ? 1 : 0), 5);
 
-  // Compute alpha vs global benchmark
-  const globalEquity3M = benchmarks?.global?.equity?.['3M'];
-  const globalBenchmark: number = (typeof globalEquity3M === 'object' && globalEquity3M !== null)
-    ? (globalEquity3M.z_score ?? 0)
-    : (typeof globalEquity3M === 'number' ? globalEquity3M : 0);
-  const alpha = eqZ !== null ? parseFloat((eqZ - globalBenchmark).toFixed(3)) : null;
+  // --- Helper to read benchmark z-score from Python output (handles both number and object) ---
+  function readBenchZ(benchGroup: Record<string, any> | undefined): number | null {
+    const eq3m = benchGroup?.equity?.['3M'];
+    if (eq3m === null || eq3m === undefined) return null;
+    if (typeof eq3m === 'object') return eq3m.z_score ?? null;
+    if (typeof eq3m === 'number') return eq3m;
+    return null;
+  }
+
+  function readBenchMeta(benchGroup: Record<string, any> | undefined): { groupSize: number; bestCountry: string | null; worstCountry: string | null; dispersion: number | null } {
+    const eq3m = benchGroup?.equity?.['3M'];
+    if (!eq3m || typeof eq3m !== 'object') return { groupSize: 0, bestCountry: null, worstCountry: null, dispersion: null };
+    return {
+      groupSize: eq3m.group_size ?? 0,
+      bestCountry: eq3m.best_country ?? null,
+      worstCountry: eq3m.worst_country ?? null,
+      dispersion: eq3m.dispersion ?? null,
+    };
+  }
+
+  // Read all benchmark z-scores
+  const globalBenchZ = readBenchZ(benchmarks?.global) ?? 0;
+  const regionBenchZ = readBenchZ(benchmarks?.regions?.[rc.region]);
+  const devStageBenchZ = readBenchZ(benchmarks?.development_stages?.[rc.development_stage]);
+  const opennessBenchZ = readBenchZ(benchmarks?.openness_types?.[rc.openness_type]);
+  const extVulnBenchZ = readBenchZ(benchmarks?.external_vulnerabilities?.[rc.external_vulnerability]);
+
+  // Multi-role: average z-scores across all roles
+  const roleZs = rc.global_roles
+    .map(role => readBenchZ(benchmarks?.global_roles?.[role]))
+    .filter((v): v is number => v !== null);
+  const globalRoleBenchZ = roleZs.length > 0 ? roleZs.reduce((a, b) => a + b, 0) / roleZs.length : null;
+
+  // Multi-role metadata: aggregate across all roles
+  const roleMetas = rc.global_roles
+    .map(role => readBenchMeta(benchmarks?.global_roles?.[role]))
+    .filter(m => m.groupSize > 0);
+  const globalRoleMeta = roleMetas.length > 0
+    ? {
+        groupSize: roleMetas.reduce((s, m) => s + m.groupSize, 0),
+        bestCountry: roleMetas.length === 1 ? roleMetas[0].bestCountry : 'Multi-role composite',
+        worstCountry: roleMetas.length === 1 ? roleMetas[0].worstCountry : 'Multi-role composite',
+        dispersion: roleMetas.length === 1 ? roleMetas[0].dispersion
+          : roleMetas.reduce((s, m) => s + (m.dispersion ?? 0), 0) / roleMetas.length,
+      }
+    : { groupSize: 0, bestCountry: null, worstCountry: null, dispersion: null };
+
+  // Compute alpha residuals: assetZ minus each benchmark
+  function computeAlpha(benchZ: number | null): number | null {
+    if (assetZ === null || benchZ === null) return null;
+    return parseFloat((assetZ - benchZ).toFixed(3));
+  }
+
+  const alpha_vs_global = computeAlpha(globalBenchZ);
+  const alpha_vs_region = computeAlpha(regionBenchZ);
+  const alpha_vs_development_stage = computeAlpha(devStageBenchZ);
+  const alpha_vs_global_role = computeAlpha(globalRoleBenchZ);
+  const alpha_vs_openness = computeAlpha(opennessBenchZ);
+  const alpha_vs_external_vulnerability = computeAlpha(extVulnBenchZ);
+
+  // country_alpha = vs global (backward compat), true_alpha = vs region
+  const alpha = alpha_vs_global;
 
   const scores: CountryScores = {
     asset_score: assetScore,
@@ -196,7 +252,13 @@ function adaptCountry(rc: RawCountry, benchmarks: RawPipelineData['benchmarks'])
     credit_score: creditScore,
     risk_score: riskScore,
     country_alpha: alpha,
-    true_alpha: alpha,
+    true_alpha: alpha_vs_region,
+    alpha_vs_global,
+    alpha_vs_region,
+    alpha_vs_development_stage,
+    alpha_vs_global_role,
+    alpha_vs_openness,
+    alpha_vs_external_vulnerability,
   };
 
   // Classification label — now using macro data too
@@ -206,70 +268,44 @@ function adaptCountry(rc: RawCountry, benchmarks: RawPipelineData['benchmarks'])
   const curP = currencyScore.percentile ?? 50;
   const label = classifyFromScores(assetP, macroP, riskP, curP, alpha ?? 0, rc.country, rc.region);
 
-  // Peer benchmarks — read from Python pipeline output
-  function readBench(benchGroup: Record<string, any> | undefined): { avgZ: number | null; groupSize: number; bestCountry: string | null; worstCountry: string | null; dispersion: number | null } {
-    const eq3m = benchGroup?.equity?.['3M'];
-    if (!eq3m || typeof eq3m !== 'object') return { avgZ: null, groupSize: 0, bestCountry: null, worstCountry: null, dispersion: null };
-    return {
-      avgZ: eq3m.z_score ?? null,
-      groupSize: eq3m.group_size ?? 0,
-      bestCountry: eq3m.best_country ?? null,
-      worstCountry: eq3m.worst_country ?? null,
-      dispersion: eq3m.dispersion ?? null,
-    };
-  }
-
-  const globalBench = readBench(benchmarks?.global);
-  const regionBench = readBench(benchmarks?.regions?.[rc.region]);
-  const devStageBench = readBench(benchmarks?.development_stages?.[rc.development_stage]);
-
-  // global_roles: average across all roles for multi-role countries
-  const roleBenches = rc.global_roles
-    .map(role => readBench(benchmarks?.global_roles?.[role]))
-    .filter(b => b.avgZ !== null);
-  const globalRoleBench = roleBenches.length > 0
-    ? {
-        avgZ: roleBenches.reduce((s, b) => s + (b.avgZ ?? 0), 0) / roleBenches.length,
-        groupSize: roleBenches[0].groupSize,
-        bestCountry: roleBenches[0].bestCountry,
-        worstCountry: roleBenches[0].worstCountry,
-        dispersion: roleBenches[0].dispersion,
-      }
-    : { avgZ: null, groupSize: 0, bestCountry: null, worstCountry: null, dispersion: null };
-
-  const opennessBench = readBench(benchmarks?.openness_types?.[rc.openness_type]);
-  const extVulnBench = readBench(benchmarks?.external_vulnerabilities?.[rc.external_vulnerability]);
+  // Peer benchmark metadata
+  const globalMeta = readBenchMeta(benchmarks?.global);
+  const regionMeta = readBenchMeta(benchmarks?.regions?.[rc.region]);
+  const devStageMeta = readBenchMeta(benchmarks?.development_stages?.[rc.development_stage]);
+  const opennessMeta = readBenchMeta(benchmarks?.openness_types?.[rc.openness_type]);
+  const extVulnMeta = readBenchMeta(benchmarks?.external_vulnerabilities?.[rc.external_vulnerability]);
 
   const peer_benchmarks: Record<PeerDimension, PeerBenchmark> = {
     global: {
-      dimension: 'global', group_name: 'Global', group_size: globalBench.groupSize,
-      avg_asset_score: globalBenchmark, avg_macro_score: null, avg_risk_score: null,
-      best_country: globalBench.bestCountry, worst_country: globalBench.worstCountry, dispersion: globalBench.dispersion,
+      dimension: 'global', group_name: 'Global', group_size: globalMeta.groupSize,
+      avg_asset_score: globalBenchZ, avg_macro_score: null, avg_risk_score: null,
+      best_country: globalMeta.bestCountry, worst_country: globalMeta.worstCountry, dispersion: globalMeta.dispersion,
     },
     region: {
-      dimension: 'region', group_name: rc.region, group_size: regionBench.groupSize,
-      avg_asset_score: regionBench.avgZ, avg_macro_score: null, avg_risk_score: null,
-      best_country: regionBench.bestCountry, worst_country: regionBench.worstCountry, dispersion: regionBench.dispersion,
+      dimension: 'region', group_name: rc.region, group_size: regionMeta.groupSize,
+      avg_asset_score: regionBenchZ, avg_macro_score: null, avg_risk_score: null,
+      best_country: regionMeta.bestCountry, worst_country: regionMeta.worstCountry, dispersion: regionMeta.dispersion,
     },
     development_stage: {
-      dimension: 'development_stage', group_name: rc.development_stage, group_size: devStageBench.groupSize,
-      avg_asset_score: devStageBench.avgZ, avg_macro_score: null, avg_risk_score: null,
-      best_country: devStageBench.bestCountry, worst_country: devStageBench.worstCountry, dispersion: devStageBench.dispersion,
+      dimension: 'development_stage', group_name: rc.development_stage, group_size: devStageMeta.groupSize,
+      avg_asset_score: devStageBenchZ, avg_macro_score: null, avg_risk_score: null,
+      best_country: devStageMeta.bestCountry, worst_country: devStageMeta.worstCountry, dispersion: devStageMeta.dispersion,
     },
     global_role: {
-      dimension: 'global_role', group_name: rc.global_roles[0] || 'N/A', group_size: globalRoleBench.groupSize,
-      avg_asset_score: globalRoleBench.avgZ, avg_macro_score: null, avg_risk_score: null,
-      best_country: globalRoleBench.bestCountry, worst_country: globalRoleBench.worstCountry, dispersion: globalRoleBench.dispersion,
+      dimension: 'global_role', group_name: rc.global_roles.length > 1 ? rc.global_roles.join(' + ') : (rc.global_roles[0] || 'N/A'),
+      group_size: globalRoleMeta.groupSize,
+      avg_asset_score: globalRoleBenchZ, avg_macro_score: null, avg_risk_score: null,
+      best_country: globalRoleMeta.bestCountry, worst_country: globalRoleMeta.worstCountry, dispersion: globalRoleMeta.dispersion,
     },
     openness_type: {
-      dimension: 'openness_type', group_name: rc.openness_type, group_size: opennessBench.groupSize,
-      avg_asset_score: opennessBench.avgZ, avg_macro_score: null, avg_risk_score: null,
-      best_country: opennessBench.bestCountry, worst_country: opennessBench.worstCountry, dispersion: opennessBench.dispersion,
+      dimension: 'openness_type', group_name: rc.openness_type, group_size: opennessMeta.groupSize,
+      avg_asset_score: opennessBenchZ, avg_macro_score: null, avg_risk_score: null,
+      best_country: opennessMeta.bestCountry, worst_country: opennessMeta.worstCountry, dispersion: opennessMeta.dispersion,
     },
     external_vulnerability: {
-      dimension: 'external_vulnerability', group_name: rc.external_vulnerability, group_size: extVulnBench.groupSize,
-      avg_asset_score: extVulnBench.avgZ, avg_macro_score: null, avg_risk_score: null,
-      best_country: extVulnBench.bestCountry, worst_country: extVulnBench.worstCountry, dispersion: extVulnBench.dispersion,
+      dimension: 'external_vulnerability', group_name: rc.external_vulnerability, group_size: extVulnMeta.groupSize,
+      avg_asset_score: extVulnBenchZ, avg_macro_score: null, avg_risk_score: null,
+      best_country: extVulnMeta.bestCountry, worst_country: extVulnMeta.worstCountry, dispersion: extVulnMeta.dispersion,
     },
   };
 

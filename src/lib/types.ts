@@ -184,6 +184,12 @@ export interface CountryScores {
   risk_score: CategoryScore;
   country_alpha: number | null;
   true_alpha: number | null;
+  alpha_vs_global: number | null;
+  alpha_vs_region: number | null;
+  alpha_vs_development_stage: number | null;
+  alpha_vs_global_role: number | null;
+  alpha_vs_openness: number | null;
+  alpha_vs_external_vulnerability: number | null;
 }
 
 // ---- Peer Benchmarks ----
