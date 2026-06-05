@@ -43,7 +43,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No data changes detected"
           else
-            git commit -m "chore: auto-update dashboard data [skip ci]"
+            git commit -m "chore: auto-update dashboard data"
             git push origin main
           fi
         env:
