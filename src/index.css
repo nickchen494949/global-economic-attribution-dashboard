@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* Override Tailwind v4 base styles that set white background */
+@layer base {
+  html {
+    background-color: #0a0e1a;
+    color: #f1f5f9;
+    color-scheme: dark;
+  }
+}
 /* ============================================================
    Global Economic Attribution Dashboard — Design System
    ============================================================ */
