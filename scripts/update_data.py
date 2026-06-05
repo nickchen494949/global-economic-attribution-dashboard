@@ -450,54 +450,123 @@ def compute_peer_benchmarks(
     bond_data: dict,
 ) -> dict:
     """
-    Compute global and regional average z-scores for equity, currency,
-    and bonds to use as peer benchmarks.
-    """
-    # Group countries by region
-    regions: dict[str, list[str]] = {}
-    for c in countries:
-        region = c["region"]
-        if region not in regions:
-            regions[region] = []
-        regions[region].append(c["code"])
+    Compute peer benchmarks across all 5 classification dimensions:
+    global, region, development_stage, global_roles, openness_type,
+    and external_vulnerability.
 
-    def avg_z(data_dict: dict, codes: list[str]) -> dict[str, float | None]:
-        """Average z-scores across a set of country codes, per period."""
-        result: dict[str, float | None] = {}
-        for period in RETURN_WINDOWS:
-            values = []
-            for code in codes:
-                entry = data_dict.get(code, {})
-                if not entry.get("available"):
-                    continue
-                metrics = entry.get("metrics", {}).get(period, {})
-                z = metrics.get("z_score")
+    Each benchmark group outputs:
+        { z_score, percentile, group_size, best_country, worst_country, dispersion }
+    per asset class and period.
+    """
+
+    # ── helpers ──────────────────────────────────────────────
+
+    def _z_values_for(data_dict: dict, codes: list[str], period: str) -> list[tuple[str, float]]:
+        """Return list of (country_code, z_score) pairs that have data."""
+        pairs: list[tuple[str, float]] = []
+        for code in codes:
+            entry = data_dict.get(code, {})
+            if not entry.get("available"):
+                continue
+            z = entry.get("metrics", {}).get(period, {}).get("z_score")
+            if z is not None:
+                pairs.append((code, z))
+        return pairs
+
+    def _composite_z(code: str, period: str) -> float | None:
+        """Average z-score across available asset classes for one country/period."""
+        zs: list[float] = []
+        for data_dict in (equity_data, currency_data, bond_data):
+            entry = data_dict.get(code, {})
+            if entry.get("available"):
+                z = entry.get("metrics", {}).get(period, {}).get("z_score")
                 if z is not None:
-                    values.append(z)
-            if values:
-                result[period] = round(float(np.mean(values)), 3)
+                    zs.append(z)
+        return float(np.mean(zs)) if zs else None
+
+    code_to_country: dict[str, str] = {c["code"]: c["country"] for c in countries}
+
+    def build_asset_bench(data_dict: dict, codes: list[str]) -> dict:
+        """Build benchmark dict for one asset class over a set of codes."""
+        result: dict[str, dict] = {}
+        for period in RETURN_WINDOWS:
+            pairs = _z_values_for(data_dict, codes, period)
+            if pairs:
+                values = [v for _, v in pairs]
+                mean_z = float(np.mean(values))
+                mean_z_capped = float(np.clip(mean_z, -ZSCORE_CAP, ZSCORE_CAP))
+                pct = float(norm.cdf(mean_z_capped))
+                best_code = max(pairs, key=lambda p: p[1])[0]
+                worst_code = min(pairs, key=lambda p: p[1])[0]
+                dispersion = float(np.std(values)) if len(values) > 1 else 0.0
+                result[period] = {
+                    "z_score": round(mean_z, 3),
+                    "percentile": round(pct, 4),
+                    "group_size": len(pairs),
+                    "best_country": code_to_country.get(best_code, best_code),
+                    "worst_country": code_to_country.get(worst_code, worst_code),
+                    "dispersion": round(dispersion, 3),
+                }
             else:
-                result[period] = None
+                result[period] = {
+                    "z_score": None,
+                    "percentile": None,
+                    "group_size": 0,
+                    "best_country": None,
+                    "worst_country": None,
+                    "dispersion": None,
+                }
         return result
+
+    def build_group_bench(codes: list[str]) -> dict:
+        """Build full benchmark for a group of countries (all asset classes + countries list)."""
+        return {
+            "equity": build_asset_bench(equity_data, codes),
+            "currency": build_asset_bench(currency_data, codes),
+            "bond": build_asset_bench(bond_data, codes),
+            "countries": codes,
+        }
+
+    # ── group countries by each dimension ────────────────────
 
     all_codes = [c["code"] for c in countries]
 
-    benchmarks: dict = {
-        "global": {
-            "equity": avg_z(equity_data, all_codes),
-            "currency": avg_z(currency_data, all_codes),
-            "bond": avg_z(bond_data, all_codes),
-        },
-        "regions": {},
-    }
+    # Region
+    regions: dict[str, list[str]] = {}
+    for c in countries:
+        regions.setdefault(c["region"], []).append(c["code"])
 
-    for region, codes in regions.items():
-        benchmarks["regions"][region] = {
-            "equity": avg_z(equity_data, codes),
-            "currency": avg_z(currency_data, codes),
-            "bond": avg_z(bond_data, codes),
-            "countries": codes,
-        }
+    # Development stage
+    dev_stages: dict[str, list[str]] = {}
+    for c in countries:
+        dev_stages.setdefault(c["development_stage"], []).append(c["code"])
+
+    # Global roles (array — a country can appear in multiple groups)
+    global_roles: dict[str, list[str]] = {}
+    for c in countries:
+        for role in c.get("global_roles", []):
+            global_roles.setdefault(role, []).append(c["code"])
+
+    # Openness type
+    openness: dict[str, list[str]] = {}
+    for c in countries:
+        openness.setdefault(c["openness_type"], []).append(c["code"])
+
+    # External vulnerability
+    ext_vuln: dict[str, list[str]] = {}
+    for c in countries:
+        ext_vuln.setdefault(c["external_vulnerability"], []).append(c["code"])
+
+    # ── assemble benchmarks ──────────────────────────────────
+
+    benchmarks: dict = {
+        "global": build_group_bench(all_codes),
+        "regions": {region: build_group_bench(codes) for region, codes in regions.items()},
+        "development_stages": {stage: build_group_bench(codes) for stage, codes in dev_stages.items()},
+        "global_roles": {role: build_group_bench(codes) for role, codes in global_roles.items()},
+        "openness_types": {ot: build_group_bench(codes) for ot, codes in openness.items()},
+        "external_vulnerabilities": {ev: build_group_bench(codes) for ev, codes in ext_vuln.items()},
+    }
 
     return benchmarks
 
@@ -673,7 +742,7 @@ def main() -> None:
     print("=" * 60)
 
     benchmarks = compute_peer_benchmarks(countries, equity_data, currency_data, bond_data)
-    print("  ✓ Peer benchmarks (global + regional)")
+    print("  ✓ Peer benchmarks (global + region + development_stage + global_roles + openness_type + external_vulnerability)")
 
     composites = compute_composite_scores(countries, equity_data, currency_data, bond_data)
     print("  ✓ Composite scores")

@@ -292,9 +292,22 @@ function MacroCategory({ title, score, data, fields, labels }: {
         {fields.map((field, i) => {
           const indicator = data[field]
           if (!indicator) return null
+          const isStale = isMacroStale(indicator.last_updated)
+          const updatedLabel = formatLastUpdated(indicator.last_updated)
           return (
             <div key={field} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.6875rem', color: 'var(--text-tertiary)' }}>{labels[i]}</span>
+              <span style={{ fontSize: '0.6875rem', color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                {labels[i]}
+                {updatedLabel && (
+                  <span style={{
+                    fontSize: '0.5625rem',
+                    color: isStale ? '#d97706' : 'var(--text-muted)',
+                    fontWeight: isStale ? 600 : 400,
+                  }}>
+                    {isStale ? '⚠ ' : ''}{updatedLabel}
+                  </span>
+                )}
+              </span>
               {indicator.available ? (
                 <span style={{
                   fontSize: '0.75rem', fontWeight: 600, fontVariantNumeric: 'tabular-nums',
@@ -322,6 +335,7 @@ function MacroCategory({ title, score, data, fields, labels }: {
     </div>
   )
 }
+
 
 // --- Helpers ---
 
@@ -403,4 +417,34 @@ function zToP(z: number): number {
   const d = 0.3989422804 * Math.exp(-z * z / 2)
   const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))))
   return (z > 0 ? (1 - p) : p) * 100
+}
+
+function formatLastUpdated(lastUpdated: string | null): string {
+  if (!lastUpdated) return ''
+  // If it's just a year like "2024"
+  if (/^\d{4}$/.test(lastUpdated)) return lastUpdated
+  // If it's an ISO date string, extract the year
+  const match = lastUpdated.match(/^(\d{4})-/)
+  if (match) {
+    const year = parseInt(match[1], 10)
+    const currentYear = new Date().getFullYear()
+    // If it's a recent ISO timestamp (this year or last year), it's "live" data
+    if (year >= currentYear - 1) return 'Live'
+    return match[1]
+  }
+  return lastUpdated
+}
+
+function isMacroStale(lastUpdated: string | null): boolean {
+  if (!lastUpdated) return false
+  let year: number | null = null
+  if (/^\d{4}$/.test(lastUpdated)) {
+    year = parseInt(lastUpdated, 10)
+  } else {
+    const match = lastUpdated.match(/^(\d{4})-/)
+    if (match) year = parseInt(match[1], 10)
+  }
+  if (year === null) return false
+  const currentYear = new Date().getFullYear()
+  return (currentYear - year) >= 2
 }
