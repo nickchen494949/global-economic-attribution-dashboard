@@ -84,8 +84,8 @@ for endpoint, (cat_name, field_name) in LISTS_TO_SCRAPE.items():
                                 c['macro_panel'][cat_name][field_name] = {
                                     'value': val,
                                     'available': True,
-                                    'z_score': 0.0,
-                                    'percentile': 50.0,
+                                    'z_score': None,
+                                    'percentile': None,
                                     'source': 'TradingEconomics',
                                     'last_updated': dashboard['last_updated']
                                 }
@@ -101,8 +101,8 @@ for c in dashboard['countries']:
         mp['inflation']['food_energy_pressure'] = {
             'value': round(cpi - core, 2),
             'available': True,
-            'z_score': 0.0,
-            'percentile': 50.0,
+            'z_score': None,
+            'percentile': None,
             'source': 'Derived',
             'last_updated': dashboard['last_updated']
         }

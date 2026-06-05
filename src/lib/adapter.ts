@@ -65,6 +65,12 @@ interface RawAssetBlock {
   last_date?: string;
   returns?: Record<string, number>;
   metrics?: Record<string, RawMetric>;
+  // Bond from 10Y yield snapshot
+  yield_10y?: number;
+  yield_change_1m?: number;
+  yield_change_3m?: number;
+  source?: string;
+  reason?: string;
 }
 
 interface RawMetric {
@@ -468,12 +474,16 @@ function adaptBond(raw: RawAssetBlock | undefined): BondData {
   if (!raw?.available) {
     return { available: false, yield_10y: null, yield_change_1m: null, yield_change_3m: null, bond_etf: null, cds_spread: null, z_score: null, percentile: null, peer_relative: null };
   }
-  const z = getAvgZ(raw);
+
+  // Check if this is a 10Y yield snapshot (no ETF metrics) or an ETF-based bond
+  const hasMetrics = raw.metrics && Object.keys(raw.metrics).length > 0;
+  const z = hasMetrics ? getAvgZ(raw) : null;
+
   return {
     available: true,
-    yield_10y: null, // Pipeline provides ETF returns, not yields
-    yield_change_1m: raw.returns?.['1M'] ? raw.returns['1M'] / 100 : null,
-    yield_change_3m: raw.returns?.['3M'] ? raw.returns['3M'] / 100 : null,
+    yield_10y: raw.yield_10y ?? null,
+    yield_change_1m: raw.returns?.['1M'] ? raw.returns['1M'] / 100 : (raw.yield_change_1m ?? null),
+    yield_change_3m: raw.returns?.['3M'] ? raw.returns['3M'] / 100 : (raw.yield_change_3m ?? null),
     bond_etf: raw.bond_proxy || null,
     cds_spread: null,
     z_score: z !== null ? parseFloat(z.toFixed(2)) : null,
