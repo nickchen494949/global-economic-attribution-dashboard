@@ -35,16 +35,17 @@ import type {
   GlobalRole,
   OpennessType,
   ExternalVulnerability,
+  ValuationData,
 } from '../lib/types';
 
 // ---- Helper Factories ----
 
 function mi(value: number | null, z: number | null, pct: number | null, src: string, updated: string | null = '2025-06-04', avail = true): MacroIndicator {
-  return { value, available: avail, z_score: z, percentile: pct, source: src, last_updated: updated };
+  return { value, available: avail, z_score: z, percentile: pct, source: src, last_updated: updated, own_history_z: null, peer_z: null, composite_z: null, scoring_method: null };
 }
 
 function miNA(): MacroIndicator {
-  return { value: null, available: false, z_score: null, percentile: null, source: 'N/A', last_updated: null };
+  return { value: null, available: false, z_score: null, percentile: null, source: 'N/A', last_updated: null, own_history_z: null, peer_z: null, composite_z: null, scoring_method: null };
 }
 
 function cs(score: number | null, z: number | null, pct: number | null, avail: number, total: number): CategoryScore {
@@ -60,8 +61,10 @@ function eq(ticker: string, price: number | null, r1m: number | null, r3m: numbe
 }
 
 function bd(avail: boolean, y10: number | null, yc1m: number | null, yc3m: number | null, etf: string | null, cds: number | null, z: number | null, pct: number | null, pr: number | null): BondData {
-  return { available: avail, yield_10y: y10, yield_change_1m: yc1m, yield_change_3m: yc3m, bond_etf: etf, cds_spread: cds, z_score: z, percentile: pct, peer_relative: pr };
+  return { available: avail, yield_10y: y10, yield_change_1m: yc1m, yield_change_3m: yc3m, bond_etf: etf, cds_spread: cds, sovereign_spread: null, spread_z_score: null, z_score: z, percentile: pct, peer_relative: pr };
 }
+
+const noValuation: ValuationData = { available: false, pe_ratio: null, pb_ratio: null, dividend_yield: null, earnings_yield: null, beta: null, aum: null, valuation_z: null, valuation_percentile: null, note: null };
 
 function cx(pair: string, rate: number | null, r1m: number | null, r3m: number | null, r6m: number | null, r12m: number | null, z: number | null, pct: number | null, pr: number | null): CurrencyData {
   return { pair, rate, return_1m: r1m, return_3m: r3m, return_6m: r6m, return_12m: r12m, z_score: z, percentile: pct, peer_relative: pr };
@@ -146,6 +149,7 @@ const us: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'North America', 3, 55, 56, 50, 'United States', 'Mexico', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Technology Core', 8, 62, 58, 54, 'Taiwan', 'South Korea', 'Large Domestic Economy', 7, 52, 54, 48, 'India', 'Indonesia', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Beta', 0.92, 'US is the benchmark itself. Performance tracks global beta by definition.', ['Reserve currency issuer', 'Deepest capital markets', 'Technology sector leadership'], ['Fiscal deficit widening', 'Debt/GDP elevated', 'Persistent current account deficit']),
   data_quality: dq('United States', 28, 0, 28, 'Bloomberg / FRED', 'High', []),
+  valuation: noValuation,
 };
 
 // 2. Canada — Beta
@@ -168,6 +172,7 @@ const ca: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'North America', 3, 55, 56, 50, 'United States', 'Mexico', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Resource Exporter', 10, 50, 48, 45, 'Australia', 'Nigeria', 'Medium Open Economy', 12, 52, 50, 48, 'Poland', 'Turkey', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Beta', 0.85, 'Canada tracks global cycle with resource-sector tilt. Household debt remains a structural vulnerability.', ['Stable banking system', 'Resource base supports trade balance', 'Strong institutions'], ['Elevated household debt', 'Housing market correction risk', 'Slowing growth momentum']),
   data_quality: dq('Canada', 27, 1, 28, 'StatCan / BoC', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 3. Mexico — Beta
@@ -190,6 +195,7 @@ const mx: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Latin America', 5, 48, 52, 42, 'Mexico', 'Argentina', 'Advanced Emerging Market', 9, 54, 56, 50, 'Taiwan', 'Turkey', 'Manufacturing Exporter', 9, 56, 55, 52, 'Taiwan', 'Bangladesh', 'Medium Open Economy', 12, 52, 50, 48, 'Poland', 'Turkey', 'Neutral', 12, 50, 52, 48, 'Taiwan', 'Philippines'),
   label: lbl('Beta', 0.78, 'Mexico benefits from nearshoring trend but currency weakness drags overall score. Strong growth fundamentals.', ['Nearshoring beneficiary', 'Low unemployment', 'Strong export growth'], ['Peso depreciation', 'Fiscal deficit widening', 'High policy rates']),
   data_quality: dq('Mexico', 27, 1, 28, 'INEGI / Banxico', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 4. Brazil — Hidden Alpha
@@ -212,6 +218,7 @@ const br: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Latin America', 5, 48, 52, 42, 'Mexico', 'Argentina', 'Advanced Emerging Market', 9, 54, 56, 50, 'Taiwan', 'Turkey', 'Resource Exporter', 10, 50, 48, 45, 'Australia', 'Nigeria', 'Large Domestic Economy', 7, 52, 54, 48, 'India', 'Indonesia', 'Neutral', 12, 50, 52, 48, 'Taiwan', 'Philippines'),
   label: lbl('Hidden Alpha', 0.82, 'Brazil shows weak asset performance but strong macro fundamentals. Growth is robust, exports are booming, and PMI is elevated. The market is pricing in fiscal risk that may be overstated.', ['Strong GDP growth at 2.9%', 'PMI above 54 — expansion', 'Record export performance', 'Ample FX reserves at $355B'], ['Fiscal deficit at -7.5% of GDP', 'BRL under severe pressure', 'High sovereign yields reflect risk premium', 'Political noise weighing on sentiment']),
   data_quality: dq('Brazil', 27, 1, 28, 'IBGE / BCB', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 5. Chile — Beta
@@ -234,6 +241,7 @@ const cl: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Latin America', 5, 48, 52, 42, 'Chile', 'Argentina', 'Advanced Emerging Market', 9, 54, 56, 50, 'Taiwan', 'Turkey', 'Resource Exporter', 10, 50, 48, 45, 'Australia', 'Nigeria', 'Small Open Economy', 12, 55, 54, 52, 'Singapore', 'Kenya', 'Neutral', 12, 50, 52, 48, 'Taiwan', 'Philippines'),
   label: lbl('Beta', 0.80, 'Chile is a copper-driven small open economy tracking global commodity cycle. Decent equity returns with moderate macro.', ['Copper export beneficiary', 'Manageable debt levels', 'Disinflation progress'], ['High unemployment', 'Current account deficit', 'Elevated corporate debt']),
   data_quality: dq('Chile', 27, 1, 28, 'BCCh / INE', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 6. Argentina — Fake Alpha
@@ -256,6 +264,7 @@ const ar: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Latin America', 5, 48, 52, 42, 'Chile', 'Argentina', 'Crisis / High-Risk Market', 1, 50, 18, 25, 'Argentina', 'Argentina', 'Resource Exporter', 10, 50, 48, 45, 'Australia', 'Nigeria', 'Medium Open Economy', 12, 52, 50, 48, 'Poland', 'Turkey', 'Fragile', 8, 38, 32, 28, 'South Africa', 'Pakistan'),
   label: lbl('Fake Alpha', 0.90, 'Argentina shows spectacular equity returns driven by Milei reform optimism, but macro fundamentals are in crisis. 250% inflation, collapsing output, and depleted reserves signal extreme fragility.', ['Equity market surging on reform hopes', 'Fiscal adjustment underway', 'Import compression improving trade balance'], ['Hyperinflation at 250% YoY', 'GDP contracting -1.5%', 'FX reserves critically low at $28B', 'CDS spread at 2200bps — deep distress']),
   data_quality: dq('Argentina', 27, 1, 28, 'INDEC / BCRA', 'Medium', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 7. United Kingdom — Beta
@@ -278,6 +287,7 @@ const gb: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Europe', 8, 54, 52, 52, 'Sweden', 'Turkey', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Financial Center', 6, 56, 55, 55, 'Singapore', 'Hong Kong', 'Medium Open Economy', 12, 52, 50, 48, 'Poland', 'Turkey', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Beta', 0.84, 'UK economy stagnating with sticky inflation, but asset performance is moderate. Classic developed market beta profile.', ['GBP recovery supporting returns', 'Low CDS — sovereign credit strong', 'Services sector resilient'], ['Stagnant GDP growth', 'Sticky core inflation', 'Large current account deficit']),
   data_quality: dq('United Kingdom', 28, 0, 28, 'ONS / BoE', 'High', []),
+  valuation: noValuation,
 };
 
 // 8. Germany — Beta
@@ -300,6 +310,7 @@ const de: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Europe', 8, 54, 52, 52, 'Sweden', 'Turkey', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Manufacturing Exporter', 9, 56, 55, 52, 'Taiwan', 'Bangladesh', 'Large Domestic Economy', 7, 52, 54, 48, 'India', 'Indonesia', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Fake Alpha', 0.68, 'German equities surging on ECB easing hopes and defense spending, but manufacturing recession deepens. Asset strength masks macro weakness.', ['Strong equity rally YTD', 'EUR appreciation boosting USD returns', 'Low sovereign CDS', 'Massive current account surplus'], ['Manufacturing PMI deep in contraction at 45.8', 'Industrial production falling', 'Credit growth stalling', 'Growth near zero']),
   data_quality: dq('Germany', 28, 0, 28, 'Destatis / Bundesbank', 'High', []),
+  valuation: noValuation,
 };
 
 // 9. France — Beta
@@ -322,6 +333,7 @@ const fr: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Europe', 8, 54, 52, 52, 'Sweden', 'Turkey', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Large Domestic Demand Economy', 5, 50, 52, 48, 'India', 'Egypt', 'Large Domestic Economy', 7, 52, 54, 48, 'India', 'Indonesia', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Beta', 0.82, 'France tracks European cycle with large fiscal deficit as key vulnerability. Services sector supports modest growth.', ['Tourism-driven services resilience', 'Low credit spreads', 'EUR strength boosting returns'], ['Elevated fiscal deficit at -5.5% GDP', 'High government debt', 'Persistent trade deficit', 'Manufacturing weakness']),
   data_quality: dq('France', 28, 0, 28, 'INSEE / Banque de France', 'High', []),
+  valuation: noValuation,
 };
 
 // 10. Netherlands — Beta
@@ -344,6 +356,7 @@ const nl: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Europe', 8, 54, 52, 52, 'Netherlands', 'Turkey', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Technology Core', 8, 62, 58, 54, 'Taiwan', 'South Korea', 'Small Open Economy', 12, 55, 54, 52, 'Singapore', 'Kenya', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Beta', 0.75, 'Netherlands benefits from ASML-driven tech rally and strong external position. Household/corporate debt are structural concerns.', ['ASML semiconductor dominance', 'Massive current account surplus', 'Very low CDS spread', 'Strong labor market'], ['Private sector deleveraging', 'High household debt legacy', 'Manufacturing softness', 'Small open economy — vulnerable to trade shocks']),
   data_quality: dq('Netherlands', 27, 1, 28, 'CBS / DNB', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 11. Switzerland — Beta
@@ -366,6 +379,7 @@ const ch: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Europe', 8, 54, 52, 52, 'Netherlands', 'Turkey', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Financial Center', 6, 56, 55, 55, 'Singapore', 'Hong Kong', 'Small Open Economy', 12, 55, 54, 52, 'Singapore', 'Kenya', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Beta', 0.88, 'Switzerland is a safe-haven beta with CHF strength as defining feature. Low inflation, fiscal surplus, and massive reserves provide stability.', ['Ultra-low unemployment at 2.3%', 'Fiscal surplus', 'Massive FX reserves at $780B', 'CHF safe-haven premium'], ['PMI deep in contraction territory', 'Household debt extremely elevated', 'Low inflation may signal demand weakness', 'Manufacturing sector struggling']),
   data_quality: dq('Switzerland', 27, 1, 28, 'FSO / SNB', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 12. Sweden — Beta
@@ -388,6 +402,7 @@ const se: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Europe', 8, 54, 52, 52, 'Netherlands', 'Turkey', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Manufacturing Exporter', 9, 56, 55, 52, 'Taiwan', 'Bangladesh', 'Small Open Economy', 12, 55, 54, 52, 'Singapore', 'Kenya', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Beta', 0.80, 'Sweden shows strong equity performance but weak domestic economy. Housing correction risk lingers. Classic Nordic beta.', ['Strong current account surplus', 'Low government debt', 'Technology sector strength (Ericsson, Spotify)'], ['GDP near zero', 'PMI in contraction', 'High household debt', 'Rising unemployment']),
   data_quality: dq('Sweden', 27, 1, 28, 'SCB / Riksbank', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 13. Poland — Beta
@@ -410,6 +425,7 @@ const pl: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Europe', 8, 54, 52, 52, 'Poland', 'Turkey', 'Advanced Emerging Market', 9, 54, 56, 50, 'Taiwan', 'Turkey', 'Manufacturing Exporter', 9, 56, 55, 52, 'Taiwan', 'Bangladesh', 'Medium Open Economy', 12, 52, 50, 48, 'Poland', 'Turkey', 'Neutral', 12, 50, 52, 48, 'Taiwan', 'Philippines'),
   label: lbl('True Alpha', 0.74, 'Poland shows strong equity and currency returns backed by solid GDP growth and wage-driven consumption. EU funds inflow supports outlook.', ['GDP growth at 3.5% — EU leader', 'Strong wage growth driving consumption', 'Healthy FX reserves', 'PLN appreciation'], ['Fiscal deficit widening to -5.2%', 'PMI still in contraction', 'Core inflation sticky', 'Defense spending pressure']),
   data_quality: dq('Poland', 27, 1, 28, 'GUS / NBP', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 14. Turkey — Crisis Risk
@@ -432,6 +448,7 @@ const tr: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Europe', 8, 54, 52, 52, 'Netherlands', 'Turkey', 'Emerging Market', 8, 45, 42, 38, 'India', 'Egypt', 'Manufacturing Exporter', 9, 56, 55, 52, 'Taiwan', 'Bangladesh', 'Medium Open Economy', 12, 52, 50, 48, 'Poland', 'Turkey', 'Fragile', 8, 38, 32, 28, 'South Africa', 'Pakistan'),
   label: lbl('Crisis Risk', 0.78, 'Turkey has high equity returns but 65% inflation, lira collapse, and macro instability define a crisis-risk regime. Equity gains are illusory in USD terms.', ['Nominal equity rally in TRY', 'Strong GDP growth at 4.5%', 'Tourism revenue supporting current account', 'Low government debt at 32%'], ['Inflation at 65% — monetary policy failure', 'Lira collapsed -35% over 12 months', 'CDS at 280bps — significant credit risk', 'Overheating economy with credit boom']),
   data_quality: dq('Turkey', 27, 1, 28, 'TUIK / TCMB', 'Medium', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 15. China — Beta
@@ -454,6 +471,7 @@ const cn: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'East Asia', 5, 58, 55, 55, 'Taiwan', 'Hong Kong', 'Advanced Emerging Market', 9, 54, 56, 50, 'Taiwan', 'Turkey', 'Manufacturing Exporter', 9, 56, 55, 52, 'Taiwan', 'Bangladesh', 'Large Domestic Economy', 7, 52, 54, 48, 'India', 'Indonesia', 'Neutral', 12, 50, 52, 48, 'Taiwan', 'Philippines'),
   label: lbl('Beta', 0.70, 'China shows divergent macro: strong production/exports but deflationary consumer sector and property overhang. Assets underperform.', ['GDP at 5.2% — target on track', 'Massive trade surplus', 'Largest FX reserves globally', 'Industrial production robust'], ['Deflation risk — CPI near zero', 'Property sector stress ongoing', 'Corporate debt at 160% GDP — extreme', 'Consumer confidence weak']),
   data_quality: dq('China', 27, 1, 28, 'NBS / PBoC', 'Medium', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 16. Japan — Beta
@@ -476,6 +494,7 @@ const jp: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'East Asia', 5, 58, 55, 55, 'Taiwan', 'Hong Kong', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Technology Core', 8, 62, 58, 54, 'Taiwan', 'South Korea', 'Large Domestic Economy', 7, 52, 54, 48, 'India', 'Indonesia', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Beta', 0.82, 'Japan equities rally on corporate governance reform, but yen weakness offsets USD returns. Massive govt debt is structural but manageable with domestic ownership.', ['Corporate governance reform driving equities', 'Ultra-low unemployment', 'Massive FX reserves', 'Export boom from weak yen'], ['Yen collapse — worst G10 currency', 'Govt debt at 260% GDP', 'Bond yields rising from YCC exit', 'Aging demographics']),
   data_quality: dq('Japan', 28, 0, 28, 'Cabinet Office / BoJ', 'High', []),
+  valuation: noValuation,
 };
 
 // 17. South Korea — Beta
@@ -498,6 +517,7 @@ const kr: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'East Asia', 5, 58, 55, 55, 'Taiwan', 'Hong Kong', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Technology Core', 8, 62, 58, 54, 'Taiwan', 'South Korea', 'Medium Open Economy', 12, 52, 50, 48, 'Poland', 'Turkey', 'Neutral', 12, 50, 52, 48, 'Taiwan', 'Philippines'),
   label: lbl('Beta', 0.80, 'South Korea is a semiconductor-cycle beta. Export boom driven by AI chip demand, but domestic consumption weak and household debt extreme.', ['Export growth at 11.2% — AI/semiconductor surge', 'Low unemployment', 'Strong FX reserves', 'Low credit spreads'], ['KRW weakness reducing USD returns', 'Household debt at 105% GDP', 'Retail sales contracting', 'PMI in contraction']),
   data_quality: dq('South Korea', 27, 1, 28, 'KOSTAT / BoK', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 18. Taiwan — True Alpha
@@ -520,6 +540,7 @@ const tw: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'East Asia', 5, 58, 55, 55, 'Taiwan', 'Hong Kong', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Technology Core', 8, 62, 58, 54, 'Taiwan', 'South Korea', 'Small Open Economy', 12, 55, 54, 52, 'Singapore', 'Kenya', 'Neutral', 12, 50, 52, 48, 'Taiwan', 'Philippines'),
   label: lbl('True Alpha', 0.95, 'Taiwan is the quintessential True Alpha — TSMC-driven equity outperformance is backed by exceptional macro fundamentals. 6.1% GDP growth, massive current account surplus, and booming exports make this the strongest risk/reward in the dataset.', ['GDP growth at 6.1% — global leader', 'Export growth at 15.8% on AI/semiconductor demand', 'Current account surplus at 12.5% GDP', 'Low government debt at 28% GDP', 'TSMC capex cycle driving industrial production'], ['Geopolitical risk (China/Taiwan tensions)', 'Semiconductor concentration risk', 'Household debt elevated', 'Small open economy — trade dependent']),
   data_quality: dq('Taiwan', 27, 1, 28, 'DGBAS / CBC', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // 19. Hong Kong — Beta
@@ -542,6 +563,7 @@ const hk: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'East Asia', 5, 58, 55, 55, 'Taiwan', 'Hong Kong', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Financial Center', 6, 56, 55, 55, 'Singapore', 'Hong Kong', 'Small Open Economy', 12, 55, 54, 52, 'Singapore', 'Kenya', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Unclassified', 0.65, 'Hong Kong is in structural transition — losing financial hub premium while maintaining HKD peg. China spillover dominates. Extreme corporate debt is a systemic concern.', ['Near-zero unemployment', 'Near-zero government debt', 'Massive FX reserves', 'HKD stability via peg'], ['Retail sales declining — consumer weakness', 'Corporate debt at 280% GDP — extreme', 'Property market correction ongoing', 'Credit contraction underway']),
   data_quality: dq('Hong Kong', 26, 2, 28, 'C&SD / HKMA', 'High', ['ppi', 'jobless_claims']),
+  valuation: noValuation,
 };
 
 // We store the first 19 countries here, remaining 19 are defined next.
@@ -566,6 +588,7 @@ const sg: CountryData = {
   peer_benchmarks: peerSet('India', 'Pakistan', 'Southeast Asia', 6, 48, 46, 42, 'Singapore', 'Philippines', 'Developed Market', 13, 58, 60, 55, 'Taiwan', 'Hong Kong', 'Financial Center', 6, 56, 55, 55, 'Singapore', 'Hong Kong', 'Small Open Economy', 12, 55, 54, 52, 'Singapore', 'Kenya', 'Strong', 14, 58, 60, 55, 'Taiwan', 'Egypt'),
   label: lbl('Beta', 0.85, 'Singapore is the ASEAN safe haven with massive current account surplus and ultra-low unemployment. SGD strength as policy anchor.', ['Current account surplus at 18.5% GDP', 'Lowest unemployment in dataset at 2.0%', 'AAA-rated sovereign', 'SGD managed appreciation'], ['Corporate debt elevated', 'Govt debt headline high (CPF-driven)', 'Small open economy — trade exposure', 'Property market cooling']),
   data_quality: dq('Singapore', 27, 1, 28, 'DOS / MAS', 'High', ['jobless_claims']),
+  valuation: noValuation,
 };
 
 // Export Part 1 countries array for assembly

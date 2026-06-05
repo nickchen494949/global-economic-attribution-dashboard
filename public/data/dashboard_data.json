@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-05T02:36:24.736055Z",
+  "last_updated": "2026-06-05T04:31:37.442107+00:00",
   "is_sample_data": false,
   "data_version": "1.0.0",
   "countries": [
@@ -128,7 +128,9 @@
             "percentile": 0.7755,
             "color": "green"
           }
-        }
+        },
+        "sovereign_spread": 0.0,
+        "spread_z_score": 0.322
       },
       "composite": {
         "1M": {
@@ -194,7 +196,10 @@
             "percentile": 52.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.248,
+            "composite_z": 0.151,
+            "peer_z": 0.054
           },
           "retail_sales": {
             "value": 2.53,
@@ -241,7 +246,10 @@
             "percentile": 56.7,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.75,
+            "composite_z": 0.459,
+            "peer_z": 0.168
           },
           "jobless_claims": {
             "value": 225.0,
@@ -270,7 +278,10 @@
             "percentile": 60.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.201,
+            "composite_z": 0.025,
+            "peer_z": 0.252
           },
           "core_cpi": {
             "value": 335.0,
@@ -308,7 +319,10 @@
             "percentile": 13.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.949,
+            "composite_z": -1.524,
+            "peer_z": -1.099
           },
           "trade_balance": {
             "value": 25.38,
@@ -326,7 +340,10 @@
             "percentile": 83.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.337,
+            "composite_z": 1.659,
+            "peer_z": 0.981
           },
           "export_growth": {
             "value": 3.64,
@@ -430,7 +447,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 27.366867,
+        "pb_ratio": 1.763874,
+        "dividend_yield": 0.98,
+        "beta": null,
+        "aum": 783796404224,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -1.99,
+        "pb_z": -0.977,
+        "div_yield_z": -0.309,
+        "valuation_z": -1.092,
+        "valuation_percentile": 0.1374
+      }
     },
     {
       "country": "Canada",
@@ -526,7 +558,9 @@
         "yield_10y": 3.437,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -1.043,
+        "spread_z_score": 0.497
       },
       "composite": {
         "1M": {
@@ -592,7 +626,10 @@
             "percentile": 27.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.219,
+            "composite_z": -0.41,
+            "peer_z": -0.601
           },
           "industrial_production": {
             "value": -0.06,
@@ -639,7 +676,10 @@
             "percentile": 35.5,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.007,
+            "composite_z": -0.189,
+            "peer_z": -0.372
           },
           "wage_growth": {
             "value": 32.86,
@@ -659,7 +699,10 @@
             "percentile": 60.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.05,
+            "composite_z": 0.109,
+            "peer_z": 0.268
           },
           "core_cpi": {
             "value": 162.0,
@@ -697,7 +740,10 @@
             "percentile": 30.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.434,
+            "composite_z": 0.455,
+            "peer_z": -0.525
           },
           "trade_balance": {
             "value": 65.15,
@@ -715,7 +761,10 @@
             "percentile": 36.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.832,
+            "composite_z": 0.738,
+            "peer_z": -0.357
           },
           "export_growth": {
             "value": 0.55,
@@ -810,7 +859,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 19.67619,
+        "pb_ratio": 1.8342336,
+        "dividend_yield": 1.32,
+        "beta": null,
+        "aum": 5484459008,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.689,
+        "pb_z": -1.146,
+        "div_yield_z": -0.285,
+        "valuation_z": -0.707,
+        "valuation_percentile": 0.2399
+      }
     },
     {
       "country": "Mexico",
@@ -906,7 +970,9 @@
         "yield_10y": 9.101,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 4.621,
+        "spread_z_score": -0.457
       },
       "composite": {
         "1M": {
@@ -972,7 +1038,10 @@
             "percentile": 25.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.168,
+            "composite_z": -0.416,
+            "peer_z": -0.664
           },
           "industrial_production": {
             "value": 0.26,
@@ -1019,7 +1088,10 @@
             "percentile": 68.2,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.46,
+            "composite_z": 0.966,
+            "peer_z": 0.473
           },
           "wage_growth": {
             "value": 665.0,
@@ -1039,7 +1111,10 @@
             "percentile": 58.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.197,
+            "composite_z": 0.003,
+            "peer_z": 0.204
           },
           "core_cpi": {
             "value": 145.0,
@@ -1077,7 +1152,10 @@
             "percentile": 27.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.176,
+            "composite_z": -0.207,
+            "peer_z": -0.59
           },
           "trade_balance": {
             "value": 74.59,
@@ -1095,7 +1173,10 @@
             "percentile": 43.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.849,
+            "composite_z": 0.841,
+            "peer_z": -0.167
           },
           "export_growth": {
             "value": 3.33,
@@ -1199,7 +1280,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 12.6359005,
+        "pb_ratio": 1.5099531,
+        "dividend_yield": 3.07,
+        "beta": null,
+        "aum": 1987181568,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.501,
+        "pb_z": -0.369,
+        "div_yield_z": -0.16,
+        "valuation_z": -0.009,
+        "valuation_percentile": 0.4964
+      }
     },
     {
       "country": "Brazil",
@@ -1295,7 +1391,9 @@
         "yield_10y": 14.515,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 10.035,
+        "spread_z_score": -1.369
       },
       "composite": {
         "1M": {
@@ -1361,7 +1459,10 @@
             "percentile": 65.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.569,
+            "composite_z": 0.477,
+            "peer_z": 0.386
           },
           "industrial_production": {
             "value": 3.08,
@@ -1408,7 +1509,10 @@
             "percentile": 42.7,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.345,
+            "composite_z": 0.581,
+            "peer_z": -0.184
           },
           "wage_growth": {
             "value": 3722.0,
@@ -1428,7 +1532,10 @@
             "percentile": 58.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.725,
+            "composite_z": 0.469,
+            "peer_z": 0.213
           },
           "core_cpi": {
             "value": 4.46,
@@ -1466,7 +1573,10 @@
             "percentile": 17.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.229,
+            "composite_z": -0.578,
+            "peer_z": -0.927
           },
           "trade_balance": {
             "value": 35.58,
@@ -1484,7 +1594,10 @@
             "percentile": 50.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.046,
+            "composite_z": -0.524,
+            "peer_z": -0.001
           },
           "export_growth": {
             "value": 2.76,
@@ -1579,7 +1692,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 12.566919,
+        "pb_ratio": 0.95074075,
+        "dividend_yield": 4.59,
+        "beta": null,
+        "aum": 10174738432,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.513,
+        "pb_z": 0.971,
+        "div_yield_z": -0.052,
+        "valuation_z": 0.478,
+        "valuation_percentile": 0.6835
+      }
     },
     {
       "country": "Chile",
@@ -1674,7 +1802,9 @@
         "yield_10y": 5.62,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 1.14,
+        "spread_z_score": 0.13
       },
       "composite": {
         "1M": {
@@ -1740,7 +1870,10 @@
             "percentile": 49.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.075,
+            "composite_z": -0.05,
+            "peer_z": -0.026
           },
           "industrial_production": {
             "value": 3.46,
@@ -1778,7 +1911,10 @@
             "percentile": 21.7,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.859,
+            "composite_z": -0.821,
+            "peer_z": -0.782
           },
           "wage_growth": {
             "value": 7257.0,
@@ -1798,7 +1934,10 @@
             "percentile": 58.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.102,
+            "composite_z": 0.057,
+            "peer_z": 0.215
           },
           "core_cpi": {
             "value": 110.0,
@@ -1836,7 +1975,10 @@
             "percentile": 24.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.042,
+            "composite_z": 0.181,
+            "peer_z": -0.68
           },
           "trade_balance": {
             "value": 63.86,
@@ -1854,7 +1996,10 @@
             "percentile": 31.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.76,
+            "composite_z": 0.138,
+            "peer_z": -0.484
           },
           "export_growth": {
             "value": 6.64,
@@ -1958,7 +2103,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 12.684167,
+        "pb_ratio": null,
+        "dividend_yield": 1.94,
+        "beta": null,
+        "aum": 1058669696,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.493,
+        "pb_z": null,
+        "div_yield_z": -0.24,
+        "valuation_z": 0.126,
+        "valuation_percentile": 0.5503
+      }
     },
     {
       "country": "Argentina",
@@ -2049,7 +2209,9 @@
       "bond": {
         "available": false,
         "bond_proxy": null,
-        "reason": "No bond ETF proxy and no 10Y yield data available"
+        "reason": "No bond ETF proxy and no 10Y yield data available",
+        "sovereign_spread": null,
+        "spread_z_score": null
       },
       "composite": {
         "1M": {
@@ -2086,7 +2248,10 @@
             "percentile": 1.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.475,
+            "composite_z": -1.301,
+            "peer_z": -2.126
           },
           "industrial_production": {
             "value": -6.95,
@@ -2124,7 +2289,10 @@
             "percentile": 33.8,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.617,
+            "composite_z": 0.1,
+            "peer_z": -0.417
           },
           "wage_growth": {
             "value": 2094848.0,
@@ -2144,7 +2312,10 @@
             "percentile": 0.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -2.134,
+            "composite_z": -2.567,
+            "peer_z": -3.0
           },
           "core_cpi": {
             "value": 11604.0,
@@ -2182,7 +2353,10 @@
             "percentile": 38.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.278,
+            "composite_z": 0.486,
+            "peer_z": -0.306
           },
           "trade_balance": {
             "value": 27.93,
@@ -2200,7 +2374,10 @@
             "percentile": 30.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.982,
+            "composite_z": -0.745,
+            "peer_z": -0.509
           },
           "export_growth": {
             "value": 19.8,
@@ -2315,6 +2492,21 @@
         "percentile": 47.4,
         "available_count": 6,
         "total_count": 6
+      },
+      "valuation": {
+        "pe_ratio": 14.656621,
+        "pb_ratio": null,
+        "dividend_yield": 0.79,
+        "beta": null,
+        "aum": 900721088,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.16,
+        "pb_z": null,
+        "div_yield_z": -0.322,
+        "valuation_z": -0.081,
+        "valuation_percentile": 0.4676
       }
     },
     {
@@ -2440,7 +2632,9 @@
             "percentile": 0.2878,
             "color": "red"
           }
-        }
+        },
+        "sovereign_spread": 0.432,
+        "spread_z_score": 0.249
       },
       "composite": {
         "1M": {
@@ -2506,7 +2700,10 @@
             "percentile": 20.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.141,
+            "composite_z": -0.482,
+            "peer_z": -0.823
           },
           "industrial_production": {
             "value": -0.74,
@@ -2553,7 +2750,10 @@
             "percentile": 52.3,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.447,
+            "composite_z": 0.253,
+            "peer_z": 0.059
           },
           "wage_growth": {
             "value": 749.0,
@@ -2573,7 +2773,10 @@
             "percentile": 59.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.231,
+            "composite_z": 0.006,
+            "peer_z": 0.243
           },
           "core_cpi": {
             "value": 138.0,
@@ -2611,7 +2814,10 @@
             "percentile": 17.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.27,
+            "composite_z": -0.324,
+            "peer_z": -0.919
           },
           "trade_balance": {
             "value": 62.84,
@@ -2629,7 +2835,10 @@
             "percentile": 39.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.824,
+            "composite_z": 0.28,
+            "peer_z": -0.264
           },
           "export_growth": {
             "value": 0.65,
@@ -2733,7 +2942,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 17.953533,
+        "pb_ratio": 1.4184998,
+        "dividend_yield": 3.51,
+        "beta": null,
+        "aum": 3447056896,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.398,
+        "pb_z": -0.15,
+        "div_yield_z": -0.129,
+        "valuation_z": -0.225,
+        "valuation_percentile": 0.4108
+      }
     },
     {
       "country": "Germany",
@@ -2829,7 +3053,9 @@
         "yield_10y": 3.0237,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -1.456,
+        "spread_z_score": 0.567
       },
       "composite": {
         "1M": {
@@ -2895,7 +3121,10 @@
             "percentile": 4.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.884,
+            "composite_z": -1.284,
+            "peer_z": -1.683
           },
           "industrial_production": {
             "value": -3.98,
@@ -2942,7 +3171,10 @@
             "percentile": 60.5,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.51,
+            "composite_z": 0.388,
+            "peer_z": 0.266
           },
           "wage_growth": {
             "value": 4701.0,
@@ -2962,7 +3194,10 @@
             "percentile": 60.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.084,
+            "composite_z": 0.094,
+            "peer_z": 0.271
           },
           "core_cpi": {
             "value": 121.0,
@@ -3000,7 +3235,10 @@
             "percentile": 68.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.822,
+            "composite_z": -0.175,
+            "peer_z": 0.472
           },
           "trade_balance": {
             "value": 79.09,
@@ -3018,7 +3256,10 @@
             "percentile": 53.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.395,
+            "composite_z": 1.238,
+            "peer_z": 0.08
           },
           "export_growth": {
             "value": -2.06,
@@ -3122,7 +3363,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 17.91709,
+        "pb_ratio": 1.3387002,
+        "dividend_yield": 1.56,
+        "beta": null,
+        "aum": 1472494336,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.392,
+        "pb_z": 0.042,
+        "div_yield_z": -0.268,
+        "valuation_z": -0.206,
+        "valuation_percentile": 0.4184
+      }
     },
     {
       "country": "France",
@@ -3218,7 +3474,9 @@
         "yield_10y": 3.67,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -0.81,
+        "spread_z_score": 0.458
       },
       "composite": {
         "1M": {
@@ -3284,7 +3542,10 @@
             "percentile": 21.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.025,
+            "composite_z": -0.408,
+            "peer_z": -0.791
           },
           "industrial_production": {
             "value": 2.22,
@@ -3331,7 +3592,10 @@
             "percentile": 31.0,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.186,
+            "composite_z": 0.344,
+            "peer_z": -0.497
           },
           "wage_growth": {
             "value": 3602.0,
@@ -3360,7 +3624,10 @@
             "percentile": 61.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.209,
+            "composite_z": 0.035,
+            "peer_z": 0.278
           },
           "core_cpi": {
             "value": 101.0,
@@ -3398,7 +3665,10 @@
             "percentile": 33.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.207,
+            "composite_z": 0.387,
+            "peer_z": -0.433
           },
           "trade_balance": {
             "value": 68.11,
@@ -3416,7 +3686,10 @@
             "percentile": 46.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.108,
+            "composite_z": 1.014,
+            "peer_z": -0.081
           },
           "export_growth": {
             "value": 2.53,
@@ -3520,7 +3793,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 17.997517,
+        "pb_ratio": 1.1913831,
+        "dividend_yield": 2.58,
+        "beta": null,
+        "aum": 384979360,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.405,
+        "pb_z": 0.395,
+        "div_yield_z": -0.195,
+        "valuation_z": -0.069,
+        "valuation_percentile": 0.4727
+      }
     },
     {
       "country": "Netherlands",
@@ -3617,7 +3905,9 @@
         "yield_10y": 3.1507,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -1.329,
+        "spread_z_score": 0.546
       },
       "composite": {
         "1M": {
@@ -3683,7 +3973,10 @@
             "percentile": 19.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.209,
+            "composite_z": -0.529,
+            "peer_z": -0.849
           },
           "industrial_production": {
             "value": -1.2,
@@ -3730,7 +4023,10 @@
             "percentile": 59.2,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.747,
+            "composite_z": 0.49,
+            "peer_z": 0.234
           },
           "wage_growth": {
             "value": 3875.0,
@@ -3750,7 +4046,10 @@
             "percentile": 59.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.387,
+            "composite_z": -0.073,
+            "peer_z": 0.241
           },
           "core_cpi": {
             "value": 103.0,
@@ -3788,7 +4087,10 @@
             "percentile": 84.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.065,
+            "composite_z": 1.032,
+            "peer_z": 0.998
           },
           "trade_balance": {
             "value": 153.83,
@@ -3806,7 +4108,10 @@
             "percentile": 33.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.23,
+            "composite_z": 0.902,
+            "peer_z": -0.425
           },
           "export_growth": {
             "value": -0.16,
@@ -3910,7 +4215,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 19.522223,
+        "pb_ratio": 1.2899565,
+        "dividend_yield": 4.28,
+        "beta": null,
+        "aum": 549967296,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.663,
+        "pb_z": 0.158,
+        "div_yield_z": -0.074,
+        "valuation_z": -0.193,
+        "valuation_percentile": 0.4235
+      }
     },
     {
       "country": "Switzerland",
@@ -4006,7 +4326,9 @@
         "yield_10y": 0.397,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -4.083,
+        "spread_z_score": 1.01
       },
       "composite": {
         "1M": {
@@ -4072,7 +4394,10 @@
             "percentile": 23.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.355,
+            "composite_z": -0.544,
+            "peer_z": -0.733
           },
           "industrial_production": {
             "value": 1.65,
@@ -4119,7 +4444,10 @@
             "percentile": 51.4,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.841,
+            "composite_z": -0.403,
+            "peer_z": 0.035
           },
           "wage_growth": {
             "value": 7150.0,
@@ -4139,7 +4467,10 @@
             "percentile": 62.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.632,
+            "composite_z": -0.164,
+            "peer_z": 0.304
           },
           "core_cpi": {
             "value": 100.0,
@@ -4177,7 +4508,10 @@
             "percentile": 84.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.578,
+            "composite_z": 0.794,
+            "peer_z": 1.009
           },
           "trade_balance": {
             "value": 134.1,
@@ -4195,7 +4529,10 @@
             "percentile": 83.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.77,
+            "composite_z": 0.875,
+            "peer_z": 0.98
           },
           "export_growth": {
             "value": -0.28,
@@ -4290,7 +4627,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 22.541588,
+        "pb_ratio": 1.4289014,
+        "dividend_yield": 1.62,
+        "beta": null,
+        "aum": 1704484096,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -1.174,
+        "pb_z": -0.174,
+        "div_yield_z": -0.263,
+        "valuation_z": -0.537,
+        "valuation_percentile": 0.2956
+      }
     },
     {
       "country": "Sweden",
@@ -4386,7 +4738,9 @@
         "yield_10y": 2.868,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -1.612,
+        "spread_z_score": 0.593
       },
       "composite": {
         "1M": {
@@ -4452,7 +4806,10 @@
             "percentile": 16.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.581,
+            "composite_z": -0.784,
+            "peer_z": -0.986
           },
           "industrial_production": {
             "value": -1.08,
@@ -4499,7 +4856,10 @@
             "percentile": 23.4,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.311,
+            "composite_z": -1.019,
+            "peer_z": -0.726
           },
           "wage_growth": {
             "value": 209.0,
@@ -4519,7 +4879,10 @@
             "percentile": 60.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.228,
+            "composite_z": 0.014,
+            "peer_z": 0.255
           },
           "core_cpi": {
             "value": 122.0,
@@ -4557,7 +4920,10 @@
             "percentile": 71.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.225,
+            "composite_z": 0.902,
+            "peer_z": 0.578
           },
           "trade_balance": {
             "value": 105.88,
@@ -4575,7 +4941,10 @@
             "percentile": 32.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.752,
+            "composite_z": 0.15,
+            "peer_z": -0.453
           },
           "export_growth": {
             "value": 1.96,
@@ -4679,7 +5048,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 15.647263,
+        "pb_ratio": 1.0930058,
+        "dividend_yield": 3.06,
+        "beta": null,
+        "aum": 320424992,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.008,
+        "pb_z": 0.63,
+        "div_yield_z": -0.161,
+        "valuation_z": 0.154,
+        "valuation_percentile": 0.5612
+      }
     },
     {
       "country": "Poland",
@@ -4775,7 +5159,9 @@
         "yield_10y": 5.719,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 1.239,
+        "spread_z_score": 0.113
       },
       "composite": {
         "1M": {
@@ -4841,7 +5227,10 @@
             "percentile": 57.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.168,
+            "composite_z": 0.006,
+            "peer_z": 0.18
           },
           "industrial_production": {
             "value": -0.53,
@@ -4888,7 +5277,10 @@
             "percentile": 65.9,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.934,
+            "composite_z": 0.673,
+            "peer_z": 0.411
           },
           "wage_growth": {
             "value": 9563.0,
@@ -4908,7 +5300,10 @@
             "percentile": 59.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.044,
+            "composite_z": 0.093,
+            "peer_z": 0.229
           },
           "core_cpi": {
             "value": 3.0,
@@ -4946,7 +5341,10 @@
             "percentile": 34.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.923,
+            "composite_z": 0.262,
+            "peer_z": -0.4
           },
           "trade_balance": {
             "value": 100.36,
@@ -4964,7 +5362,10 @@
             "percentile": 42.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.376,
+            "composite_z": 1.097,
+            "peer_z": -0.182
           },
           "export_growth": {
             "value": 2.0,
@@ -5068,7 +5469,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 12.480235,
+        "pb_ratio": null,
+        "dividend_yield": 4.14,
+        "beta": null,
+        "aum": 642547968,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.528,
+        "pb_z": null,
+        "div_yield_z": -0.084,
+        "valuation_z": 0.222,
+        "valuation_percentile": 0.5878
+      }
     },
     {
       "country": "Turkey",
@@ -5165,7 +5581,9 @@
         "yield_10y": 31.82,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 27.34,
+        "spread_z_score": -3.0
       },
       "composite": {
         "1M": {
@@ -5231,7 +5649,10 @@
             "percentile": 63.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.803,
+            "composite_z": -0.232,
+            "peer_z": 0.339
           },
           "industrial_production": {
             "value": 2.05,
@@ -5278,7 +5699,10 @@
             "percentile": 24.4,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.445,
+            "composite_z": 0.377,
+            "peer_z": -0.692
           },
           "wage_growth": {
             "value": 39253.0,
@@ -5298,7 +5722,10 @@
             "percentile": 10.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.796,
+            "composite_z": -1.537,
+            "peer_z": -1.278
           },
           "core_cpi": {
             "value": 123.0,
@@ -5336,7 +5763,10 @@
             "percentile": 28.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.08,
+            "composite_z": 0.256,
+            "peer_z": -0.569
           },
           "trade_balance": {
             "value": 54.6,
@@ -5354,7 +5784,10 @@
             "percentile": 38.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.155,
+            "composite_z": 0.93,
+            "peer_z": -0.296
           },
           "export_growth": {
             "value": 0.07,
@@ -5458,7 +5891,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 17.147034,
+        "pb_ratio": null,
+        "dividend_yield": 2.14,
+        "beta": null,
+        "aum": 218278912,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.262,
+        "pb_z": null,
+        "div_yield_z": -0.226,
+        "valuation_z": -0.244,
+        "valuation_percentile": 0.4037
+      }
     },
     {
       "country": "China",
@@ -5584,7 +6032,9 @@
             "percentile": 0.9793,
             "color": "green"
           }
-        }
+        },
+        "sovereign_spread": -2.765,
+        "spread_z_score": 0.788
       },
       "composite": {
         "1M": {
@@ -5650,7 +6100,10 @@
             "percentile": 88.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.836,
+            "composite_z": 0.187,
+            "peer_z": 1.21
           },
           "industrial_production": {
             "value": 5.32,
@@ -5697,7 +6150,10 @@
             "percentile": 53.4,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.029,
+            "composite_z": 0.028,
+            "peer_z": 0.084
           },
           "wage_growth": {
             "value": 129441.0,
@@ -5717,7 +6173,10 @@
             "percentile": 62.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.517,
+            "composite_z": 0.922,
+            "peer_z": 0.327
           },
           "core_cpi": {
             "value": 101.0,
@@ -5755,7 +6214,10 @@
             "percentile": 46.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.462,
+            "composite_z": 0.187,
+            "peer_z": -0.089
           },
           "trade_balance": {
             "value": 37.2,
@@ -5773,7 +6235,10 @@
             "percentile": 99.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.367,
+            "composite_z": 1.683,
+            "peer_z": 3.0
           },
           "import_growth": {
             "value": 25.3,
@@ -5859,7 +6324,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 10.2656,
+        "pb_ratio": 0.8789276,
+        "dividend_yield": 2.63,
+        "beta": null,
+        "aum": 5520180736,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.902,
+        "pb_z": 1.143,
+        "div_yield_z": -0.191,
+        "valuation_z": 0.618,
+        "valuation_percentile": 0.7317
+      }
     },
     {
       "country": "Japan",
@@ -5985,7 +6465,9 @@
             "percentile": 0.0887,
             "color": "red"
           }
-        }
+        },
+        "sovereign_spread": -1.814,
+        "spread_z_score": 0.627
       },
       "composite": {
         "1M": {
@@ -6051,7 +6533,10 @@
             "percentile": 8.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.443,
+            "composite_z": -0.905,
+            "peer_z": -1.366
           },
           "industrial_production": {
             "value": 1.45,
@@ -6098,7 +6583,10 @@
             "percentile": 69.7,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.928,
+            "composite_z": 0.722,
+            "peer_z": 0.517
           },
           "wage_growth": {
             "value": 358095.0,
@@ -6118,7 +6606,10 @@
             "percentile": 60.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.493,
+            "composite_z": -0.617,
+            "peer_z": 0.258
           },
           "core_cpi": {
             "value": 112.0,
@@ -6156,7 +6647,10 @@
             "percentile": 61.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.438,
+            "composite_z": 0.868,
+            "peer_z": 0.298
           },
           "trade_balance": {
             "value": 46.41,
@@ -6174,7 +6668,10 @@
             "percentile": 93.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.569,
+            "composite_z": 0.477,
+            "peer_z": 1.524
           },
           "export_growth": {
             "value": 1.12,
@@ -6278,7 +6775,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 19.346313,
+        "pb_ratio": 1.3921467,
+        "dividend_yield": 3.92,
+        "beta": null,
+        "aum": 21298173952,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.634,
+        "pb_z": -0.086,
+        "div_yield_z": -0.099,
+        "valuation_z": -0.273,
+        "valuation_percentile": 0.3924
+      }
     },
     {
       "country": "South Korea",
@@ -6374,7 +6886,9 @@
         "yield_10y": 4.254,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -0.226,
+        "spread_z_score": 0.36
       },
       "composite": {
         "1M": {
@@ -6440,7 +6954,10 @@
             "percentile": 35.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.637,
+            "composite_z": -0.5,
+            "peer_z": -0.363
           },
           "industrial_production": {
             "value": 2.92,
@@ -6487,7 +7004,10 @@
             "percentile": 68.1,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.367,
+            "composite_z": 0.919,
+            "peer_z": 0.471
           },
           "wage_growth": {
             "value": 4708760.0,
@@ -6507,7 +7027,10 @@
             "percentile": 60.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.179,
+            "composite_z": 0.045,
+            "peer_z": 0.27
           },
           "core_cpi": {
             "value": 118.0,
@@ -6545,7 +7068,10 @@
             "percentile": 65.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.79,
+            "composite_z": 0.593,
+            "peer_z": 0.396
           },
           "trade_balance": {
             "value": 84.64,
@@ -6563,7 +7089,10 @@
             "percentile": 55.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.735,
+            "composite_z": 0.442,
+            "peer_z": 0.149
           },
           "export_growth": {
             "value": 6.83,
@@ -6667,7 +7196,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 20.662292,
+        "pb_ratio": 2.312559,
+        "dividend_yield": 0.99,
+        "beta": null,
+        "aum": 24140621824,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.856,
+        "pb_z": -2.292,
+        "div_yield_z": -0.308,
+        "valuation_z": -1.152,
+        "valuation_percentile": 0.1247
+      }
     },
     {
       "country": "Taiwan",
@@ -6763,7 +7307,9 @@
         "yield_10y": 1.73,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -2.75,
+        "spread_z_score": 0.785
       },
       "composite": {
         "1M": {
@@ -7011,7 +7557,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 26.220612,
+        "pb_ratio": 1.8146718,
+        "dividend_yield": 0.97,
+        "beta": null,
+        "aum": 10750864384,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -1.796,
+        "pb_z": -1.099,
+        "div_yield_z": -0.31,
+        "valuation_z": -1.068,
+        "valuation_percentile": 0.1427
+      }
     },
     {
       "country": "Hong Kong",
@@ -7107,7 +7668,9 @@
         "yield_10y": 3.315,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -1.165,
+        "spread_z_score": 0.518
       },
       "composite": {
         "1M": {
@@ -7173,7 +7736,10 @@
             "percentile": 46.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.133,
+            "composite_z": 0.017,
+            "peer_z": -0.099
           },
           "industrial_production": {
             "value": 3.57,
@@ -7220,7 +7786,10 @@
             "percentile": 67.3,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.921,
+            "composite_z": 0.684,
+            "peer_z": 0.447
           },
           "wage_growth": {
             "value": 19683.0,
@@ -7240,7 +7809,10 @@
             "percentile": 61.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.726,
+            "composite_z": 0.506,
+            "peer_z": 0.286
           },
           "ppi": {
             "value": 9.5,
@@ -7260,7 +7832,10 @@
             "percentile": 95.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.067,
+            "composite_z": 1.87,
+            "peer_z": 1.672
           },
           "trade_balance": {
             "value": 359.51,
@@ -7278,7 +7853,10 @@
             "percentile": 56.4,
             "source": "World Bank",
             "last_updated": "2023",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.476,
+            "composite_z": 0.319,
+            "peer_z": 0.161
           },
           "export_growth": {
             "value": 4.76,
@@ -7373,7 +7951,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 18.025711,
+        "pb_ratio": 0.8727329,
+        "dividend_yield": 4.78,
+        "beta": null,
+        "aum": 1089546880,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.41,
+        "pb_z": 1.158,
+        "div_yield_z": -0.038,
+        "valuation_z": 0.237,
+        "valuation_percentile": 0.5935
+      }
     },
     {
       "country": "Singapore",
@@ -7469,7 +8062,9 @@
         "yield_10y": 2.098,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -2.382,
+        "spread_z_score": 0.723
       },
       "composite": {
         "1M": {
@@ -7535,7 +8130,10 @@
             "percentile": 81.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.005,
+            "composite_z": 0.446,
+            "peer_z": 0.898
           },
           "industrial_production": {
             "value": 4.19,
@@ -7582,7 +8180,10 @@
             "percentile": 67.1,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.829,
+            "composite_z": 1.136,
+            "peer_z": 0.443
           },
           "wage_growth": {
             "value": 6593.0,
@@ -7602,7 +8203,10 @@
             "percentile": 60.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.118,
+            "composite_z": 0.075,
+            "peer_z": 0.268
           },
           "core_cpi": {
             "value": 102.0,
@@ -7640,7 +8244,10 @@
             "percentile": 99.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.127,
+            "composite_z": 1.138,
+            "peer_z": 2.402
           },
           "trade_balance": {
             "value": 322.37,
@@ -7658,7 +8265,10 @@
             "percentile": 53.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.516,
+            "composite_z": 0.803,
+            "peer_z": 0.091
           },
           "export_growth": {
             "value": 5.44,
@@ -7744,7 +8354,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 16.450686,
+        "pb_ratio": 1.289412,
+        "dividend_yield": 3.82,
+        "beta": null,
+        "aum": 782655232,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.144,
+        "pb_z": 0.16,
+        "div_yield_z": -0.107,
+        "valuation_z": -0.03,
+        "valuation_percentile": 0.488
+      }
     },
     {
       "country": "Malaysia",
@@ -7840,7 +8465,9 @@
         "yield_10y": 3.569,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -0.911,
+        "spread_z_score": 0.475
       },
       "composite": {
         "1M": {
@@ -7906,7 +8533,10 @@
             "percentile": 89.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.168,
+            "composite_z": 0.723,
+            "peer_z": 1.278
           },
           "industrial_production": {
             "value": 4.9,
@@ -7953,7 +8583,10 @@
             "percentile": 60.1,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.443,
+            "composite_z": -0.094,
+            "peer_z": 0.256
           },
           "wage_growth": {
             "value": 3167.0,
@@ -7973,7 +8606,10 @@
             "percentile": 61.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.161,
+            "composite_z": 0.222,
+            "peer_z": 0.283
           },
           "core_cpi": {
             "value": 2.0,
@@ -8011,7 +8647,10 @@
             "percentile": 42.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.927,
+            "composite_z": -0.554,
+            "peer_z": -0.18
           },
           "trade_balance": {
             "value": 137.36,
@@ -8029,7 +8668,10 @@
             "percentile": 35.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.231,
+            "composite_z": -0.066,
+            "peer_z": -0.363
           },
           "export_growth": {
             "value": 8.3,
@@ -8124,7 +8766,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 14.743082,
+        "pb_ratio": 1.46684,
+        "dividend_yield": 3.25,
+        "beta": null,
+        "aum": 366176896,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.145,
+        "pb_z": -0.265,
+        "div_yield_z": -0.147,
+        "valuation_z": -0.089,
+        "valuation_percentile": 0.4645
+      }
     },
     {
       "country": "Thailand",
@@ -8220,7 +8877,9 @@
         "yield_10y": 2.245,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -2.235,
+        "spread_z_score": 0.698
       },
       "composite": {
         "1M": {
@@ -8286,7 +8945,10 @@
             "percentile": 46.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.02,
+            "composite_z": -0.049,
+            "peer_z": -0.078
           },
           "industrial_production": {
             "value": 0.89,
@@ -8333,7 +8995,10 @@
             "percentile": 80.2,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.188,
+            "composite_z": 0.331,
+            "peer_z": 0.849
           }
         },
         "inflation": {
@@ -8344,7 +9009,10 @@
             "percentile": 61.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.111,
+            "composite_z": 0.204,
+            "peer_z": 0.296
           },
           "core_cpi": {
             "value": 102.0,
@@ -8382,7 +9050,10 @@
             "percentile": 46.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.234,
+            "composite_z": -0.165,
+            "peer_z": -0.097
           },
           "trade_balance": {
             "value": 136.75,
@@ -8400,7 +9071,10 @@
             "percentile": 43.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.15,
+            "composite_z": 0.496,
+            "peer_z": -0.158
           },
           "export_growth": {
             "value": 7.84,
@@ -8495,7 +9169,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 16.876514,
+        "pb_ratio": null,
+        "dividend_yield": 2.74,
+        "beta": null,
+        "aum": 263992624,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.216,
+        "pb_z": null,
+        "div_yield_z": -0.183,
+        "valuation_z": -0.2,
+        "valuation_percentile": 0.4209
+      }
     },
     {
       "country": "Indonesia",
@@ -8591,7 +9280,9 @@
         "yield_10y": 6.823,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 2.343,
+        "spread_z_score": -0.073
       },
       "composite": {
         "1M": {
@@ -8657,7 +9348,10 @@
             "percentile": 89.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.148,
+            "composite_z": 0.692,
+            "peer_z": 1.236
           },
           "industrial_production": {
             "value": 5.17,
@@ -8704,7 +9398,10 @@
             "percentile": 64.0,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.321,
+            "composite_z": 0.84,
+            "peer_z": 0.359
           },
           "wage_growth": {
             "value": 3288.0,
@@ -8724,7 +9421,10 @@
             "percentile": 60.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.222,
+            "composite_z": 0.748,
+            "peer_z": 0.274
           },
           "core_cpi": {
             "value": 109.0,
@@ -8762,7 +9462,10 @@
             "percentile": 29.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.461,
+            "composite_z": -0.041,
+            "peer_z": -0.544
           },
           "trade_balance": {
             "value": 42.57,
@@ -8780,7 +9483,10 @@
             "percentile": 38.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.846,
+            "composite_z": 0.775,
+            "peer_z": -0.296
           },
           "export_growth": {
             "value": 6.51,
@@ -8875,7 +9581,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 9.674327,
+        "pb_ratio": null,
+        "dividend_yield": 5.26,
+        "beta": null,
+        "aum": 288610592,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 1.002,
+        "pb_z": null,
+        "div_yield_z": -0.004,
+        "valuation_z": 0.499,
+        "valuation_percentile": 0.6912
+      }
     },
     {
       "country": "Vietnam",
@@ -8970,7 +9691,9 @@
         "yield_10y": 4.472,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": -0.008,
+        "spread_z_score": 0.323
       },
       "composite": {
         "1M": {
@@ -9036,7 +9759,10 @@
             "percentile": 99.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.612,
+            "composite_z": 1.468,
+            "peer_z": 2.323
           },
           "industrial_production": {
             "value": 8.24,
@@ -9083,7 +9809,10 @@
             "percentile": 75.9,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.102,
+            "composite_z": 0.402,
+            "peer_z": 0.702
           },
           "wage_growth": {
             "value": 9013.0,
@@ -9103,7 +9832,10 @@
             "percentile": 59.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.333,
+            "composite_z": 0.284,
+            "peer_z": 0.234
           },
           "core_cpi": {
             "value": 4.67,
@@ -9132,7 +9864,10 @@
             "percentile": 71.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.55,
+            "composite_z": 1.053,
+            "peer_z": 0.555
           },
           "trade_balance": {
             "value": 173.86,
@@ -9150,7 +9885,10 @@
             "percentile": 33.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.887,
+            "composite_z": 0.234,
+            "peer_z": -0.419
           },
           "export_growth": {
             "value": 15.46,
@@ -9236,7 +9974,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 16.544088,
+        "pb_ratio": null,
+        "dividend_yield": 0.2,
+        "beta": null,
+        "aum": 570453184,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.16,
+        "pb_z": null,
+        "div_yield_z": -0.364,
+        "valuation_z": -0.262,
+        "valuation_percentile": 0.3966
+      }
     },
     {
       "country": "Philippines",
@@ -9332,7 +10085,9 @@
         "yield_10y": 7.548,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 3.068,
+        "spread_z_score": -0.195
       },
       "composite": {
         "1M": {
@@ -9398,7 +10153,10 @@
             "percentile": 94.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.103,
+            "composite_z": 0.844,
+            "peer_z": 1.584
           },
           "industrial_production": {
             "value": 5.64,
@@ -9445,7 +10203,10 @@
             "percentile": 71.2,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.134,
+            "composite_z": 0.847,
+            "peer_z": 0.56
           }
         },
         "inflation": {
@@ -9456,7 +10217,10 @@
             "percentile": 59.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.151,
+            "composite_z": 0.198,
+            "peer_z": 0.245
           },
           "core_cpi": {
             "value": 133.0,
@@ -9494,7 +10258,10 @@
             "percentile": 13.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.507,
+            "composite_z": -1.295,
+            "peer_z": -1.083
           },
           "trade_balance": {
             "value": 65.89,
@@ -9512,7 +10279,10 @@
             "percentile": 35.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.349,
+            "composite_z": 0.484,
+            "peer_z": -0.38
           },
           "export_growth": {
             "value": 3.31,
@@ -9598,7 +10368,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 8.674127,
+        "pb_ratio": null,
+        "dividend_yield": 2.2,
+        "beta": null,
+        "aum": 127923312,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 1.171,
+        "pb_z": null,
+        "div_yield_z": -0.222,
+        "valuation_z": 0.475,
+        "valuation_percentile": 0.6825
+      }
     },
     {
       "country": "India",
@@ -9694,7 +10479,9 @@
         "yield_10y": 7.015,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 2.535,
+        "spread_z_score": -0.105
       },
       "composite": {
         "1M": {
@@ -9760,7 +10547,10 @@
             "percentile": 97.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.071,
+            "composite_z": 1.039,
+            "peer_z": 2.007
           },
           "industrial_production": {
             "value": 5.9,
@@ -9807,7 +10597,10 @@
             "percentile": 56.5,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.743,
+            "composite_z": 0.954,
+            "peer_z": 0.164
           }
         },
         "inflation": {
@@ -9818,7 +10611,10 @@
             "percentile": 57.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.613,
+            "composite_z": 0.405,
+            "peer_z": 0.197
           },
           "ppi": {
             "value": 8.3,
@@ -9838,7 +10634,10 @@
             "percentile": 28.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.639,
+            "composite_z": 0.031,
+            "peer_z": -0.577
           },
           "trade_balance": {
             "value": 44.65,
@@ -9856,7 +10655,10 @@
             "percentile": 70.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.542,
+            "composite_z": 1.036,
+            "peer_z": 0.529
           },
           "export_growth": {
             "value": 6.34,
@@ -9951,7 +10753,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 22.525736,
+        "pb_ratio": null,
+        "dividend_yield": 0.0,
+        "beta": null,
+        "aum": 6759351296,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -1.171,
+        "pb_z": null,
+        "div_yield_z": -0.379,
+        "valuation_z": -0.775,
+        "valuation_percentile": 0.2192
+      }
     },
     {
       "country": "Pakistan",
@@ -10046,7 +10863,9 @@
         "yield_10y": 12.765,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 8.285,
+        "spread_z_score": -1.074
       },
       "composite": {
         "1M": {
@@ -10112,7 +10931,10 @@
             "percentile": 57.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.194,
+            "composite_z": -0.002,
+            "peer_z": 0.191
           },
           "industrial_production": {
             "value": -1.19,
@@ -10150,7 +10972,10 @@
             "percentile": 47.0,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.901,
+            "composite_z": -0.488,
+            "peer_z": -0.075
           }
         },
         "inflation": {
@@ -10161,7 +10986,10 @@
             "percentile": 49.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.305,
+            "composite_z": -0.159,
+            "peer_z": -0.014
           },
           "core_cpi": {
             "value": 9.0,
@@ -10199,7 +11027,10 @@
             "percentile": 33.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.269,
+            "composite_z": 0.421,
+            "peer_z": -0.427
           },
           "trade_balance": {
             "value": 27.58,
@@ -10217,7 +11048,10 @@
             "percentile": 29.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.533,
+            "composite_z": 0.002,
+            "peer_z": -0.528
           },
           "export_growth": {
             "value": -1.33,
@@ -10303,7 +11137,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 4.923423,
+        "pb_ratio": null,
+        "dividend_yield": 5.81,
+        "beta": null,
+        "aum": 28349530,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 1.806,
+        "pb_z": null,
+        "div_yield_z": 0.035,
+        "valuation_z": 0.921,
+        "valuation_percentile": 0.8214
+      }
     },
     {
       "country": "Bangladesh",
@@ -10361,7 +11210,9 @@
       "bond": {
         "available": false,
         "bond_proxy": null,
-        "reason": "No bond ETF proxy and no 10Y yield data available"
+        "reason": "No bond ETF proxy and no 10Y yield data available",
+        "sovereign_spread": null,
+        "spread_z_score": null
       },
       "composite": {
         "1M": {
@@ -10398,7 +11249,10 @@
             "percentile": 79.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.802,
+            "composite_z": -0.497,
+            "peer_z": 0.808
           },
           "industrial_production": {
             "value": 3.51,
@@ -10436,7 +11290,10 @@
             "percentile": 59.9,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.82,
+            "composite_z": 0.536,
+            "peer_z": 0.252
           }
         },
         "inflation": {
@@ -10447,7 +11304,10 @@
             "percentile": 51.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.718,
+            "composite_z": -0.837,
+            "peer_z": 0.045
           }
         },
         "external_balance": {
@@ -10458,7 +11318,10 @@
             "percentile": 29.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.092,
+            "composite_z": -0.322,
+            "peer_z": -0.553
           },
           "trade_balance": {
             "value": 26.78,
@@ -10476,7 +11339,10 @@
             "percentile": 30.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.477,
+            "composite_z": -0.5,
+            "peer_z": -0.523
           },
           "export_growth": {
             "value": -17.13,
@@ -10582,6 +11448,20 @@
         "percentile": 43.4,
         "available_count": 6,
         "total_count": 6
+      },
+      "valuation": {
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "dividend_yield": null,
+        "beta": null,
+        "aum": null,
+        "available": false,
+        "source": "Yahoo Finance",
+        "pe_z": null,
+        "pb_z": null,
+        "div_yield_z": null,
+        "valuation_z": null,
+        "valuation_percentile": null
       }
     },
     {
@@ -10673,7 +11553,9 @@
       "bond": {
         "available": false,
         "bond_proxy": null,
-        "reason": "No bond ETF proxy and no 10Y yield data available"
+        "reason": "No bond ETF proxy and no 10Y yield data available",
+        "sovereign_spread": null,
+        "spread_z_score": null
       },
       "composite": {
         "1M": {
@@ -10710,7 +11592,10 @@
             "percentile": 35.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.495,
+            "composite_z": -0.429,
+            "peer_z": -0.363
           },
           "industrial_production": {
             "value": -0.86,
@@ -10757,7 +11642,10 @@
             "percentile": 65.5,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.244,
+            "composite_z": 1.321,
+            "peer_z": 0.399
           },
           "wage_growth": {
             "value": -5.7,
@@ -10777,7 +11665,10 @@
             "percentile": 61.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.41,
+            "composite_z": 0.349,
+            "peer_z": 0.287
           },
           "ppi": {
             "value": 3.3,
@@ -10797,7 +11688,10 @@
             "percentile": 25.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.853,
+            "composite_z": -0.754,
+            "peer_z": -0.655
           },
           "trade_balance": {
             "value": 54.68,
@@ -10815,7 +11709,10 @@
             "percentile": 58.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.876,
+            "composite_z": -0.325,
+            "peer_z": 0.226
           },
           "export_growth": {
             "value": 2.04,
@@ -10921,6 +11818,21 @@
         "percentile": 52.9,
         "available_count": 6,
         "total_count": 6
+      },
+      "valuation": {
+        "pe_ratio": 14.993239,
+        "pb_ratio": null,
+        "dividend_yield": 2.78,
+        "beta": null,
+        "aum": 686255872,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.103,
+        "pb_z": null,
+        "div_yield_z": -0.181,
+        "valuation_z": -0.039,
+        "valuation_percentile": 0.4845
       }
     },
     {
@@ -11014,7 +11926,9 @@
       "bond": {
         "available": false,
         "bond_proxy": null,
-        "reason": "No bond ETF proxy and no 10Y yield data available"
+        "reason": "No bond ETF proxy and no 10Y yield data available",
+        "sovereign_spread": null,
+        "spread_z_score": null
       },
       "composite": {
         "1M": {
@@ -11051,7 +11965,10 @@
             "percentile": 75.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.189,
+            "composite_z": 0.438,
+            "peer_z": 0.687
           },
           "industrial_production": {
             "value": 2.98,
@@ -11098,7 +12015,10 @@
             "percentile": 71.6,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.447,
+            "composite_z": 0.509,
+            "peer_z": 0.572
           }
         },
         "inflation": {
@@ -11109,7 +12029,10 @@
             "percentile": 61.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.127,
+            "composite_z": 0.08,
+            "peer_z": 0.288
           }
         },
         "external_balance": {
@@ -11138,7 +12061,10 @@
             "percentile": 43.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.531,
+            "composite_z": 1.187,
+            "peer_z": -0.157
           },
           "export_growth": {
             "value": 6.88,
@@ -11244,6 +12170,21 @@
         "percentile": 74.2,
         "available_count": 6,
         "total_count": 6
+      },
+      "valuation": {
+        "pe_ratio": 8.444284,
+        "pb_ratio": null,
+        "dividend_yield": 4.09,
+        "beta": null,
+        "aum": 274869504,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 1.21,
+        "pb_z": null,
+        "div_yield_z": -0.087,
+        "valuation_z": 0.562,
+        "valuation_percentile": 0.7128
       }
     },
     {
@@ -11335,7 +12276,9 @@
       "bond": {
         "available": false,
         "bond_proxy": null,
-        "reason": "No bond ETF proxy and no 10Y yield data available"
+        "reason": "No bond ETF proxy and no 10Y yield data available",
+        "sovereign_spread": null,
+        "spread_z_score": null
       },
       "composite": {
         "1M": {
@@ -11372,7 +12315,10 @@
             "percentile": 43.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.333,
+            "composite_z": -0.253,
+            "peer_z": -0.173
           },
           "industrial_production": {
             "value": 1.0,
@@ -11401,7 +12347,10 @@
             "percentile": 83.6,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.596,
+            "composite_z": 0.788,
+            "peer_z": 0.979
           }
         },
         "inflation": {
@@ -11412,7 +12361,10 @@
             "percentile": 61.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.068,
+            "composite_z": 0.183,
+            "peer_z": 0.299
           },
           "ppi": {
             "value": 19.71,
@@ -11432,7 +12384,10 @@
             "percentile": 98.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.183,
+            "composite_z": 1.236,
+            "peer_z": 2.289
           },
           "trade_balance": {
             "value": 100.21,
@@ -11450,7 +12405,10 @@
             "percentile": 32.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.569,
+            "composite_z": 0.551,
+            "peer_z": -0.468
           }
         },
         "fiscal_debt": {
@@ -11538,6 +12496,21 @@
         "percentile": 53.1,
         "available_count": 6,
         "total_count": 6
+      },
+      "valuation": {
+        "pe_ratio": 11.287087,
+        "pb_ratio": null,
+        "dividend_yield": 3.47,
+        "beta": null,
+        "aum": 83740288,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.73,
+        "pb_z": null,
+        "div_yield_z": -0.131,
+        "valuation_z": 0.299,
+        "valuation_percentile": 0.6175
       }
     },
     {
@@ -11630,7 +12603,9 @@
       "bond": {
         "available": false,
         "bond_proxy": null,
-        "reason": "No bond ETF proxy and no 10Y yield data available"
+        "reason": "No bond ETF proxy and no 10Y yield data available",
+        "sovereign_spread": null,
+        "spread_z_score": null
       },
       "composite": {
         "1M": {
@@ -11667,7 +12642,10 @@
             "percentile": 44.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.054,
+            "composite_z": -0.603,
+            "peer_z": -0.152
           },
           "industrial_production": {
             "value": -1.92,
@@ -11714,7 +12692,10 @@
             "percentile": 36.5,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.165,
+            "composite_z": 0.409,
+            "peer_z": -0.346
           }
         },
         "inflation": {
@@ -11725,7 +12706,10 @@
             "percentile": 32.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.625,
+            "composite_z": -1.035,
+            "peer_z": -0.445
           },
           "core_cpi": {
             "value": 276.0,
@@ -11763,7 +12747,10 @@
             "percentile": 8.9,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.68,
+            "composite_z": -1.514,
+            "peer_z": -1.348
           },
           "trade_balance": {
             "value": 39.6,
@@ -11781,7 +12768,10 @@
             "percentile": 31.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.323,
+            "composite_z": 0.42,
+            "peer_z": -0.483
           },
           "export_growth": {
             "value": -10.62,
@@ -11887,6 +12877,21 @@
         "percentile": 31.4,
         "available_count": 6,
         "total_count": 6
+      },
+      "valuation": {
+        "pe_ratio": 8.534348,
+        "pb_ratio": null,
+        "dividend_yield": 6.97,
+        "beta": null,
+        "aum": 20318928,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 1.195,
+        "pb_z": null,
+        "div_yield_z": 0.118,
+        "valuation_z": 0.657,
+        "valuation_percentile": 0.7443
       }
     },
     {
@@ -11983,7 +12988,9 @@
         "yield_10y": 4.918,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 0.438,
+        "spread_z_score": 0.248
       },
       "composite": {
         "1M": {
@@ -12049,7 +13056,10 @@
             "percentile": 24.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.095,
+            "composite_z": -0.895,
+            "peer_z": -0.696
           },
           "industrial_production": {
             "value": 0.55,
@@ -12096,7 +13106,10 @@
             "percentile": 57.5,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.253,
+            "composite_z": 0.721,
+            "peer_z": 0.19
           },
           "wage_growth": {
             "value": 1562.0,
@@ -12116,7 +13129,10 @@
             "percentile": 59.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.321,
+            "composite_z": -0.038,
+            "peer_z": 0.246
           },
           "core_cpi": {
             "value": 107.0,
@@ -12154,7 +13170,10 @@
             "percentile": 21.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.116,
+            "composite_z": -0.459,
+            "peer_z": -0.802
           },
           "trade_balance": {
             "value": 47.15,
@@ -12172,7 +13191,10 @@
             "percentile": 32.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.047,
+            "composite_z": 0.295,
+            "peer_z": -0.457
           },
           "export_growth": {
             "value": 3.78,
@@ -12276,7 +13298,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 20.92351,
+        "pb_ratio": 0.44818276,
+        "dividend_yield": 2.87,
+        "beta": null,
+        "aum": 1459037312,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -0.9,
+        "pb_z": 2.175,
+        "div_yield_z": -0.174,
+        "valuation_z": 0.367,
+        "valuation_percentile": 0.6432
+      }
     },
     {
       "country": "New Zealand",
@@ -12372,7 +13409,9 @@
         "yield_10y": 4.53,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 0.05,
+        "spread_z_score": 0.313
       },
       "composite": {
         "1M": {
@@ -12438,7 +13477,10 @@
             "percentile": 23.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.071,
+            "composite_z": -0.905,
+            "peer_z": -0.738
           },
           "industrial_production": {
             "value": -0.99,
@@ -12485,7 +13527,10 @@
             "percentile": 49.7,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.066,
+            "composite_z": -0.036,
+            "peer_z": -0.007
           },
           "wage_growth": {
             "value": 44.2,
@@ -12505,7 +13550,10 @@
             "percentile": 60.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.232,
+            "composite_z": 0.011,
+            "peer_z": 0.253
           },
           "core_cpi": {
             "value": 1336.0,
@@ -12543,7 +13591,10 @@
             "percentile": 11.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.485,
+            "composite_z": -0.834,
+            "peer_z": -1.183
           },
           "trade_balance": {
             "value": 51.22,
@@ -12561,7 +13612,10 @@
             "percentile": 30.1,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.396,
+            "composite_z": 0.937,
+            "peer_z": -0.522
           },
           "export_growth": {
             "value": 3.35,
@@ -12656,7 +13710,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 25.04411,
+        "pb_ratio": null,
+        "dividend_yield": 2.17,
+        "beta": null,
+        "aum": 74542336,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": -1.597,
+        "pb_z": null,
+        "div_yield_z": -0.224,
+        "valuation_z": -0.911,
+        "valuation_percentile": 0.1812
+      }
     },
     {
       "country": "South Africa",
@@ -12751,7 +13820,9 @@
         "yield_10y": 8.55,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 4.07,
+        "spread_z_score": -0.364
       },
       "composite": {
         "1M": {
@@ -12817,7 +13888,10 @@
             "percentile": 12.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.334,
+            "composite_z": -0.736,
+            "peer_z": -1.139
           },
           "industrial_production": {
             "value": -0.38,
@@ -12864,7 +13938,10 @@
             "percentile": 0.1,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.234,
+            "composite_z": -2.117,
+            "peer_z": -3.0
           },
           "wage_growth": {
             "value": 29690.0,
@@ -12884,7 +13961,10 @@
             "percentile": 58.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.748,
+            "composite_z": 0.481,
+            "peer_z": 0.213
           },
           "core_cpi": {
             "value": 106.0,
@@ -12922,7 +14002,10 @@
             "percentile": 29.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.541,
+            "composite_z": -0.003,
+            "peer_z": -0.548
           },
           "trade_balance": {
             "value": 61.65,
@@ -12940,7 +14023,10 @@
             "percentile": 32.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.057,
+            "composite_z": 0.804,
+            "peer_z": -0.449
           },
           "export_growth": {
             "value": -2.75,
@@ -13035,7 +14121,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 9.860664,
+        "pb_ratio": 1.471138,
+        "dividend_yield": 6.12,
+        "beta": null,
+        "aum": 692577728,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 0.971,
+        "pb_z": -0.276,
+        "div_yield_z": 0.057,
+        "valuation_z": 0.251,
+        "valuation_percentile": 0.599
+      }
     },
     {
       "country": "Nigeria",
@@ -13131,7 +14232,9 @@
         "yield_10y": 14.963,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 10.483,
+        "spread_z_score": -1.445
       },
       "composite": {
         "1M": {
@@ -13197,7 +14300,10 @@
             "percentile": 76.5,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.347,
+            "composite_z": 0.536,
+            "peer_z": 0.724
           },
           "industrial_production": {
             "value": 2.8,
@@ -13226,7 +14332,10 @@
             "percentile": 65.4,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.345,
+            "composite_z": 0.87,
+            "peer_z": 0.395
           }
         },
         "inflation": {
@@ -13237,7 +14346,10 @@
             "percentile": 28.0,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -2.825,
+            "composite_z": -1.704,
+            "peer_z": -0.582
           },
           "core_cpi": {
             "value": 138.0,
@@ -13266,7 +14378,10 @@
             "percentile": 73.6,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 2.049,
+            "composite_z": 1.341,
+            "peer_z": 0.632
           },
           "fx_reserves": {
             "value": 40405994024.8,
@@ -13275,7 +14390,10 @@
             "percentile": 31.2,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.6,
+            "composite_z": 0.055,
+            "peer_z": -0.491
           },
           "trade_balance": {
             "value": 355503.0,
@@ -13352,7 +14470,22 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": 1.1987525,
+        "pb_ratio": null,
+        "dividend_yield": 85.4,
+        "beta": null,
+        "aum": 11163358,
+        "available": true,
+        "source": "Yahoo Finance",
+        "note": null,
+        "pe_z": 2.436,
+        "pb_z": null,
+        "div_yield_z": 5.706,
+        "valuation_z": 4.071,
+        "valuation_percentile": 1.0
+      }
     },
     {
       "country": "Kenya",
@@ -13414,7 +14547,9 @@
         "yield_10y": 12.18,
         "yield_change_1m": null,
         "yield_change_3m": null,
-        "last_date": "2026-06-05T02:36:24.736055Z"
+        "last_date": "2026-06-05T02:36:24.736055Z",
+        "sovereign_spread": 7.7,
+        "spread_z_score": -0.976
       },
       "composite": {
         "1M": {
@@ -13480,7 +14615,10 @@
             "percentile": 85.8,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -0.081,
+            "composite_z": 0.496,
+            "peer_z": 1.072
           },
           "industrial_production": {
             "value": 0.83,
@@ -13527,7 +14665,10 @@
             "percentile": 46.8,
             "source": "World Bank",
             "last_updated": "2025",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": -1.066,
+            "composite_z": -0.573,
+            "peer_z": -0.081
           }
         },
         "inflation": {
@@ -13538,7 +14679,10 @@
             "percentile": 58.3,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 0.968,
+            "composite_z": 0.589,
+            "peer_z": 0.21
           },
           "ppi": {
             "value": -1.81,
@@ -13558,7 +14702,10 @@
             "percentile": 25.7,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.999,
+            "composite_z": 0.674,
+            "peer_z": -0.651
           },
           "trade_balance": {
             "value": 40.19,
@@ -13576,7 +14723,10 @@
             "percentile": 29.4,
             "source": "World Bank",
             "last_updated": "2024",
-            "scoring_method": "cross_sectional"
+            "scoring_method": "dual",
+            "own_history_z": 1.625,
+            "composite_z": 0.541,
+            "peer_z": -0.542
           },
           "export_growth": {
             "value": 7.5,
@@ -13662,7 +14812,21 @@
         "available_count": 6,
         "total_count": 6
       },
-      "macro_scores": {}
+      "macro_scores": {},
+      "valuation": {
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "dividend_yield": null,
+        "beta": null,
+        "aum": null,
+        "available": false,
+        "source": "Yahoo Finance",
+        "pe_z": null,
+        "pb_z": null,
+        "div_yield_z": null,
+        "valuation_z": null,
+        "valuation_percentile": null
+      }
     }
   ],
   "global_futures": {
@@ -13904,6 +15068,11 @@
           "percentile": 0.9962,
           "color": "green"
         }
+      },
+      "positioning": {
+        "net_speculative": 0,
+        "report_date": "2026-05-26",
+        "source": "CFTC COT"
       }
     },
     "CPER": {
@@ -13944,6 +15113,11 @@
           "percentile": 0.8973,
           "color": "green"
         }
+      },
+      "positioning": {
+        "net_speculative": 0,
+        "report_date": "2026-05-26",
+        "source": "CFTC COT"
       }
     },
     "GLD": {
@@ -13984,6 +15158,11 @@
           "percentile": 0.2835,
           "color": "red"
         }
+      },
+      "positioning": {
+        "net_speculative": 0,
+        "report_date": "2026-05-26",
+        "source": "CFTC COT"
       }
     },
     "VIXY": {
@@ -17534,5 +18713,32 @@
     "zscore_cap": 3.0,
     "total_countries": 37
   },
-  "macro_last_updated": "2026-06-05T10:36:34.319473"
+  "macro_last_updated": "2026-06-05T10:36:34.319473",
+  "cot_positioning": {
+    "last_updated": "2026-06-05T04:28:20.395775+00:00",
+    "source": "CFTC Commitments of Traders",
+    "contracts": {
+      "GLD": {
+        "name": "GOLD - COMMODITY EXCHANGE INC.",
+        "net_speculative": 0,
+        "long": 0,
+        "short": 0,
+        "report_date": "2026-05-26"
+      },
+      "USO": {
+        "name": "CRUDE OIL, LIGHT SWEET-WTI - ICE FUTURES EUROPE",
+        "net_speculative": 0,
+        "long": 0,
+        "short": 0,
+        "report_date": "2026-05-26"
+      },
+      "CPER": {
+        "name": "COPPER- #1 - COMMODITY EXCHANGE INC.",
+        "net_speculative": 0,
+        "long": 0,
+        "short": 0,
+        "report_date": "2026-05-26"
+      }
+    }
+  }
 }

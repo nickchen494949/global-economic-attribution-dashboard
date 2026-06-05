@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useMemo } from 'react'
-import type { DashboardData, CountryData, CategoryScore } from '../../lib/types'
+import type { DashboardData, CountryData, CategoryScore, ValuationData } from '../../lib/types'
 import { LabelBadge } from '../common/LabelBadge'
 import { ScoreCard, getScoreColor, PercentileBar, getPercentileLabel } from '../common/ScoreCard'
 
@@ -124,6 +124,9 @@ export function CountryDetailPage({ data }: CountryDetailPageProps) {
         </div>
       </div>
 
+      {/* Valuation Panel */}
+      <ValuationPanel valuation={country.valuation} ticker={country.assets.equity.ticker} />
+
       {/* Asset Panel */}
       <div className="glass-card-static" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.25rem' }}>
         <div style={{ fontSize: '0.6875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-tertiary)', marginBottom: '1rem' }}>
@@ -150,6 +153,16 @@ export function CountryDetailPage({ data }: CountryDetailPageProps) {
                   <DataRow label="10Y Yield" value={country.assets.bond.yield_10y !== null ? `${country.assets.bond.yield_10y.toFixed(2)}%` : '—'} />
                   <DataRow label="1M Change" value={country.assets.bond.yield_change_1m !== null ? `${country.assets.bond.yield_change_1m > 0 ? '+' : ''}${(country.assets.bond.yield_change_1m * 100).toFixed(0)}bps` : '—'} />
                 </div>
+                {country.assets.bond.sovereign_spread !== null && (
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                    <DataRow
+                      label="Sovereign Spread"
+                      value={`+${country.assets.bond.sovereign_spread.toFixed(2)}%`}
+                      color={country.assets.bond.sovereign_spread < 2 ? 'var(--color-strong)' : country.assets.bond.sovereign_spread <= 5 ? '#f59e0b' : 'var(--color-weak)'}
+                    />
+                    <DataRow label="vs US Treasury" value="" />
+                  </div>
+                )}
                 <ScoreMini label="Score" percentile={s.bond_score.percentile} />
               </>
             ) : (
@@ -225,6 +238,87 @@ export function CountryDetailPage({ data }: CountryDetailPageProps) {
           </table>
         </div>
       </div>
+    </div>
+  )
+}
+// --- Valuation Panel ---
+
+function formatAum(aum: number | null): string {
+  if (aum === null) return '—'
+  if (aum >= 1e9) return `$${(aum / 1e9).toFixed(1)}B`
+  if (aum >= 1e6) return `$${(aum / 1e6).toFixed(1)}M`
+  return `$${aum.toFixed(0)}`
+}
+
+function ValuationPanel({ valuation, ticker }: { valuation: ValuationData; ticker: string }) {
+  if (!valuation.available) {
+    return (
+      <div className="glass-card-static" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.25rem' }}>
+        <div style={{ fontSize: '0.6875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-tertiary)', marginBottom: '0.75rem' }}>
+          Valuation
+        </div>
+        <div className="data-unavailable" style={{ padding: '0.5rem 0' }}>
+          No valuation data — no equity ETF
+        </div>
+      </div>
+    )
+  }
+
+  const zColor = valuation.valuation_z === null ? 'var(--text-tertiary)'
+    : valuation.valuation_z > 0.5 ? 'var(--color-strong)'
+    : valuation.valuation_z > -0.5 ? '#f59e0b'
+    : 'var(--color-weak)'
+
+  return (
+    <div className="glass-card-static" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.25rem' }}>
+      <div style={{ fontSize: '0.6875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-tertiary)', marginBottom: '1rem' }}>
+        Valuation — {ticker || 'N/A'}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.75rem', marginBottom: '0.75rem' }}>
+        {valuation.dividend_yield !== null && (
+          <ValuationMetric label="Dividend Yield" value={`${valuation.dividend_yield.toFixed(2)}%`} />
+        )}
+        {valuation.beta !== null && (
+          <ValuationMetric label="Beta" value={valuation.beta.toFixed(2)} />
+        )}
+        {valuation.aum !== null && (
+          <ValuationMetric label="AUM" value={formatAum(valuation.aum)} />
+        )}
+        {valuation.pe_ratio !== null && (
+          <ValuationMetric label="P/E Ratio" value={valuation.pe_ratio.toFixed(1)} />
+        )}
+        {valuation.pb_ratio !== null && (
+          <ValuationMetric label="P/B Ratio" value={valuation.pb_ratio.toFixed(2)} />
+        )}
+        {valuation.earnings_yield !== null && (
+          <ValuationMetric label="Earnings Yield" value={`${valuation.earnings_yield.toFixed(2)}%`} />
+        )}
+      </div>
+      {valuation.valuation_z !== null && (
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+          <span style={{ fontSize: '0.6875rem', color: 'var(--text-tertiary)' }}>Valuation Z-Score</span>
+          <span style={{ fontSize: '0.875rem', fontWeight: 700, color: zColor, fontVariantNumeric: 'tabular-nums' }}>
+            {valuation.valuation_z >= 0 ? '+' : ''}{valuation.valuation_z.toFixed(2)}
+          </span>
+        </div>
+      )}
+      {valuation.valuation_percentile !== null && (
+        <PercentileBar percentile={valuation.valuation_percentile} height={4} />
+      )}
+      {valuation.note && (
+        <div style={{ fontSize: '0.625rem', color: 'var(--text-muted)', marginTop: '0.5rem', fontStyle: 'italic' }}>
+          {valuation.note}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function ValuationMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div style={{ padding: '0.5rem 0.75rem', background: 'var(--bg-card)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-subtle)' }}>
+      <div style={{ fontSize: '0.625rem', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>{label}</div>
+      <div style={{ fontSize: '0.875rem', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{value}</div>
     </div>
   )
 }

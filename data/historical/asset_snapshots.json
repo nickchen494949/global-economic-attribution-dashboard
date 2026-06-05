@@ -1,0 +1,226 @@
+{
+  "2026-06": {
+    "US": {
+      "equity_z": 0.699,
+      "currency_z": 0.389,
+      "macro_z": -0.019,
+      "spread": 0.0
+    },
+    "CA": {
+      "equity_z": 0.413,
+      "currency_z": -0.663,
+      "macro_z": -0.24,
+      "spread": -1.043
+    },
+    "MX": {
+      "equity_z": 0.228,
+      "currency_z": 0.559,
+      "macro_z": 0.012,
+      "spread": 4.621
+    },
+    "BR": {
+      "equity_z": -0.52,
+      "currency_z": 0.485,
+      "macro_z": -0.1,
+      "spread": 10.035
+    },
+    "CL": {
+      "equity_z": -0.132,
+      "currency_z": 0.581,
+      "macro_z": -0.096,
+      "spread": 1.14
+    },
+    "AR": {
+      "equity_z": -0.422,
+      "currency_z": 0.677,
+      "macro_z": -0.065,
+      "spread": null
+    },
+    "GB": {
+      "equity_z": -0.076,
+      "currency_z": -0.54,
+      "macro_z": -0.172,
+      "spread": 0.432
+    },
+    "DE": {
+      "equity_z": -0.567,
+      "currency_z": -0.418,
+      "macro_z": -0.168,
+      "spread": -1.456
+    },
+    "FR": {
+      "equity_z": 0.164,
+      "currency_z": -0.418,
+      "macro_z": -0.304,
+      "spread": -0.81
+    },
+    "NL": {
+      "equity_z": 1.089,
+      "currency_z": -0.418,
+      "macro_z": -0.088,
+      "spread": -1.329
+    },
+    "CH": {
+      "equity_z": -0.05,
+      "currency_z": -0.497,
+      "macro_z": 0.106,
+      "spread": -4.083
+    },
+    "SE": {
+      "equity_z": -0.016,
+      "currency_z": -0.622,
+      "macro_z": -0.103,
+      "spread": -1.612
+    },
+    "PL": {
+      "equity_z": 0.308,
+      "currency_z": -0.509,
+      "macro_z": -0.051,
+      "spread": 1.239
+    },
+    "TR": {
+      "equity_z": 0.131,
+      "currency_z": 0.421,
+      "macro_z": -0.309,
+      "spread": 27.34
+    },
+    "CN": {
+      "equity_z": -0.823,
+      "currency_z": 1.316,
+      "macro_z": 0.396,
+      "spread": -2.765
+    },
+    "JP": {
+      "equity_z": 1.153,
+      "currency_z": -0.51,
+      "macro_z": -0.035,
+      "spread": -1.814
+    },
+    "KR": {
+      "equity_z": 2.584,
+      "currency_z": -1.252,
+      "macro_z": 0.341,
+      "spread": -0.226
+    },
+    "TW": {
+      "equity_z": 2.657,
+      "currency_z": -0.321,
+      "macro_z": 0.543,
+      "spread": -2.75
+    },
+    "HK": {
+      "equity_z": -0.416,
+      "currency_z": -0.431,
+      "macro_z": 0.276,
+      "spread": -1.165
+    },
+    "SG": {
+      "equity_z": -0.049,
+      "currency_z": -0.473,
+      "macro_z": 0.071,
+      "spread": -2.382
+    },
+    "MY": {
+      "equity_z": -0.591,
+      "currency_z": -0.385,
+      "macro_z": 0.129,
+      "spread": -0.911
+    },
+    "TH": {
+      "equity_z": 1.572,
+      "currency_z": -0.886,
+      "macro_z": 0.205,
+      "spread": -2.235
+    },
+    "ID": {
+      "equity_z": -2.756,
+      "currency_z": -1.948,
+      "macro_z": 0.168,
+      "spread": 2.343
+    },
+    "VN": {
+      "equity_z": -0.314,
+      "currency_z": 0.763,
+      "macro_z": 0.465,
+      "spread": -0.008
+    },
+    "PH": {
+      "equity_z": -0.481,
+      "currency_z": -1.369,
+      "macro_z": 0.032,
+      "spread": 3.068
+    },
+    "IN": {
+      "equity_z": -1.117,
+      "currency_z": -1.99,
+      "macro_z": 0.13,
+      "spread": 2.535
+    },
+    "PK": {
+      "equity_z": null,
+      "currency_z": -0.125,
+      "macro_z": -0.295,
+      "spread": 8.285
+    },
+    "BD": {
+      "equity_z": null,
+      "currency_z": 0.605,
+      "macro_z": -0.165,
+      "spread": null
+    },
+    "SA": {
+      "equity_z": 0.426,
+      "currency_z": 2.141,
+      "macro_z": 0.074,
+      "spread": null
+    },
+    "AE": {
+      "equity_z": -0.732,
+      "currency_z": -0.132,
+      "macro_z": 0.65,
+      "spread": null
+    },
+    "QA": {
+      "equity_z": -0.429,
+      "currency_z": -0.943,
+      "macro_z": 0.077,
+      "spread": null
+    },
+    "EG": {
+      "equity_z": null,
+      "currency_z": 0.347,
+      "macro_z": -0.483,
+      "spread": null
+    },
+    "AU": {
+      "equity_z": 0.135,
+      "currency_z": 0.664,
+      "macro_z": -0.022,
+      "spread": 0.438
+    },
+    "NZ": {
+      "equity_z": 0.1,
+      "currency_z": 0.036,
+      "macro_z": -0.111,
+      "spread": 0.05
+    },
+    "ZA": {
+      "equity_z": -0.541,
+      "currency_z": 0.424,
+      "macro_z": -0.498,
+      "spread": 4.07
+    },
+    "NG": {
+      "equity_z": null,
+      "currency_z": 0.597,
+      "macro_z": 0.217,
+      "spread": 10.483
+    },
+    "KE": {
+      "equity_z": null,
+      "currency_z": -0.38,
+      "macro_z": -0.051,
+      "spread": 7.7
+    }
+  }
+}

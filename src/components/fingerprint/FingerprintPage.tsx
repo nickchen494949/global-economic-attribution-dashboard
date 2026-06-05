@@ -151,6 +151,18 @@ function AssetCard({ asset }: { asset: FuturesAsset }) {
       {asset.percentile !== null && (
         <PercentileBar percentile={asset.percentile} height={4} />
       )}
+
+      {asset.positioning && asset.positioning.net_speculative !== null && (
+        <div style={{ marginTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.625rem', color: 'var(--text-tertiary)' }}>COT Positioning</span>
+          <span style={{
+            fontSize: '0.6875rem', fontWeight: 600, fontVariantNumeric: 'tabular-nums',
+            color: asset.positioning.net_speculative >= 0 ? 'var(--color-strong)' : 'var(--color-weak)',
+          }}>
+            Net Spec: {asset.positioning.net_speculative >= 0 ? '+' : ''}{formatNetSpec(asset.positioning.net_speculative)}
+          </span>
+        </div>
+      )}
     </div>
   )
 }
@@ -173,6 +185,12 @@ function ChangeCell({ label, value }: { label: string; value: number | null }) {
       </div>
     </div>
   )
+}
+
+function formatNetSpec(value: number): string {
+  const abs = Math.abs(value)
+  if (abs >= 1000) return `${(value / 1000).toFixed(0)}K`
+  return value.toFixed(0)
 }
 
 const fingerprintRules = [

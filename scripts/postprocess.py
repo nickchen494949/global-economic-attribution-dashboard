@@ -252,6 +252,201 @@ def main():
             }
 
     # ================================================================
+    # STEP 5: Compute sovereign spread (CDS proxy)
+    # ================================================================
+    print("\n  --- Step 5: Sovereign spread computation ---")
+
+    # Get US 10Y yield as reference
+    us_yield = None
+    for c in countries:
+        if c['code'] == 'US':
+            bond = c.get('bond', {})
+            if bond.get('available') and bond.get('yield_10y') is not None:
+                us_yield = bond['yield_10y']
+            else:
+                mp = c.get('macro_panel', {})
+                y = mp.get('fiscal_debt', {}).get('yield_10y', {})
+                if isinstance(y, dict) and y.get('value') is not None:
+                    us_yield = y['value']
+            break
+
+    if us_yield is not None:
+        spread_data = []
+        for c in countries:
+            code = c['code']
+            bond = c.get('bond', {})
+            country_yield = bond.get('yield_10y')
+
+            if country_yield is None:
+                mp = c.get('macro_panel', {})
+                y = mp.get('fiscal_debt', {}).get('yield_10y', {})
+                if isinstance(y, dict) and y.get('value') is not None:
+                    country_yield = y['value']
+
+            if country_yield is not None:
+                spread = round(country_yield - us_yield, 3)
+                bond['sovereign_spread'] = spread
+                spread_data.append((code, spread))
+            else:
+                bond['sovereign_spread'] = None
+                bond['spread_z_score'] = None
+
+        # Cross-sectional z-score of spreads (lower = less risky = better)
+        if len(spread_data) >= MIN_COUNTRIES_FOR_ZSCORE:
+            vals = [v for _, v in spread_data]
+            mean_s = sum(vals) / len(vals)
+            var_s = sum((v - mean_s) ** 2 for v in vals) / len(vals)
+            std_s = math.sqrt(var_s) if var_s > 0 else 0
+
+            for c in countries:
+                bond = c.get('bond', {})
+                sp = bond.get('sovereign_spread')
+                if sp is not None and std_s > 0:
+                    z = -((sp - mean_s) / std_s)  # Negative: lower spread = better
+                    z = max(-3.0, min(3.0, z))
+                    bond['spread_z_score'] = round(z, 3)
+                else:
+                    bond['spread_z_score'] = None
+
+        print(f"  US 10Y yield: {us_yield}%")
+        print(f"  ✓ Computed sovereign spread for {len(spread_data)} countries")
+    else:
+        print("  ⚠ US 10Y yield not found — skipping sovereign spread")
+
+    # ================================================================
+    # STEP 6: Own-history z-scores (if historical data exists)
+    # ================================================================
+    print("\n  --- Step 6: Own-history z-scores ---")
+    HISTORY_PATH = os.path.join(PROJECT_ROOT, 'data', 'historical', 'macro_history.json')
+
+    if os.path.exists(HISTORY_PATH):
+        with open(HISTORY_PATH, 'r') as f:
+            macro_history_raw = json.load(f)
+
+        # seed_history.py stores under {"metadata": ..., "data": {...}}
+        macro_history = macro_history_raw.get('data', macro_history_raw)
+
+        # Map WB indicator names to our macro field names
+        WB_TO_FIELD = {
+            'gdp_growth': ('growth', 'gdp_growth'),
+            'cpi': ('inflation', 'cpi_yoy'),
+            'unemployment': ('labor', 'unemployment'),
+            'current_account': ('external_balance', 'current_account_pct_gdp'),
+            'fx_reserves': ('external_balance', 'fx_reserves'),
+        }
+
+        own_history_count = 0
+
+        for wb_name, (cat_name, field_name) in WB_TO_FIELD.items():
+            indicator_history = macro_history.get(wb_name, {})
+            if not indicator_history:
+                continue
+
+            for c in countries:
+                code = c['code']
+                country_hist = indicator_history.get(code, {})
+                hist_values = [v for v in country_hist.values() if v is not None]
+
+                if len(hist_values) < 5:
+                    continue
+
+                # Get current value
+                mp = c.get('macro_panel', {})
+                field = mp.get(cat_name, {}).get(field_name, {})
+                if not isinstance(field, dict) or not field.get('available'):
+                    continue
+                current = field.get('value')
+                if current is None:
+                    continue
+
+                # Compute own-history z-score
+                h_mean = sum(hist_values) / len(hist_values)
+                h_var = sum((v - h_mean) ** 2 for v in hist_values) / len(hist_values)
+                h_std = math.sqrt(h_var) if h_var > 0 else 0
+
+                if h_std > 0:
+                    direction = -1 if field_name in LOWER_IS_BETTER else 1
+                    own_z = ((current - h_mean) / h_std) * direction
+                    own_z = max(-3.0, min(3.0, own_z))
+                    field['own_history_z'] = round(own_z, 3)
+
+                    # Compute composite: 50/50 blend of own-history and peer cross-sectional
+                    peer_z = field.get('z_score')
+                    if peer_z is not None:
+                        comp_z = 0.5 * own_z + 0.5 * peer_z
+                        field['composite_z'] = round(comp_z, 3)
+                        field['peer_z'] = peer_z
+                    else:
+                        field['composite_z'] = round(own_z, 3)
+                        field['peer_z'] = None
+
+                    field['scoring_method'] = 'dual'
+                    own_history_count += 1
+
+        print(f"  ✓ Computed {own_history_count} own-history z-scores from historical data")
+    else:
+        print(f"  ⚠ No historical data at {HISTORY_PATH} — skipping own-history z-scores")
+        print("    Run scripts/seed_history.py first to seed historical data")
+
+    # ================================================================
+    # STEP 7: Append current snapshot to history
+    # ================================================================
+    print("\n  --- Step 7: Append current snapshot ---")
+    SNAPSHOT_DIR = os.path.join(PROJECT_ROOT, 'data', 'historical')
+    SNAPSHOT_PATH = os.path.join(SNAPSHOT_DIR, 'asset_snapshots.json')
+
+    os.makedirs(SNAPSHOT_DIR, exist_ok=True)
+
+    # Load existing snapshots
+    if os.path.exists(SNAPSHOT_PATH):
+        with open(SNAPSHOT_PATH, 'r') as f:
+            snapshots = json.load(f)
+    else:
+        snapshots = {}
+
+    # Create current month key
+    from datetime import datetime
+    month_key = datetime.utcnow().strftime('%Y-%m')
+
+    if month_key not in snapshots:
+        current_snap = {}
+        for c in countries:
+            code = c['code']
+            # Asset z-scores
+            eq = c.get('equity', {})
+            eq_z = None
+            if eq.get('available') and eq.get('metrics'):
+                zs = [m.get('z_score') for m in eq['metrics'].values() if isinstance(m, dict) and m.get('z_score') is not None]
+                if zs:
+                    eq_z = round(sum(zs) / len(zs), 3)
+
+            cur = c.get('currency', {})
+            cur_z = None
+            if cur.get('available') and cur.get('metrics'):
+                zs = [m.get('z_score') for m in cur['metrics'].values() if isinstance(m, dict) and m.get('z_score') is not None]
+                if zs:
+                    cur_z = round(sum(zs) / len(zs), 3)
+
+            macro_z = None
+            mc = c.get('macro_composite', {})
+            if isinstance(mc, dict):
+                macro_z = mc.get('z_score')
+
+            current_snap[code] = {
+                'equity_z': eq_z,
+                'currency_z': cur_z,
+                'macro_z': macro_z,
+                'spread': c.get('bond', {}).get('sovereign_spread'),
+            }
+
+        snapshots[month_key] = current_snap
+        with open(SNAPSHOT_PATH, 'w') as f:
+            json.dump(snapshots, f, indent=2)
+        print(f"  ✓ Appended snapshot for {month_key} ({len(current_snap)} countries)")
+    else:
+        print(f"  ✓ Snapshot for {month_key} already exists, skipping")
+
+    # ================================================================
     # STEP 5: Summary audit
     # ================================================================
     print("\n  --- Summary ---")

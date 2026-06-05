@@ -9,6 +9,7 @@ import type {
   CountryScores, CategoryScore, PeerBenchmark, PeerDimension,
   CountryLabelResult, CountryLabel, DataQuality,
   GlobalFingerprint, FuturesAsset, MarketRegime,
+  ValuationData,
 } from './types';
 
 // The raw format from Python pipeline
@@ -54,6 +55,10 @@ interface RawMacroIndicator {
   percentile: number | null;
   source: string;
   last_updated: string | null;
+  own_history_z?: number | null;
+  peer_z?: number | null;
+  composite_z?: number | null;
+  scoring_method?: string | null;
 }
 
 interface RawAssetBlock {
@@ -139,6 +144,7 @@ function adaptCountry(rc: RawCountry, benchmarks: RawPipelineData['benchmarks'])
   const equity = adaptEquity(rc.equity);
   const bond = adaptBond(rc.bond);
   const currency = adaptCurrency(rc.currency);
+  const valuation = adaptValuation((rc as any).valuation);
 
   const assets: AssetPanel = { equity, bond, currency };
 
@@ -359,7 +365,7 @@ function adaptCountry(rc: RawCountry, benchmarks: RawPipelineData['benchmarks'])
     missing_fields: missingFields,
   };
 
-  return { classification, assets, macro, scores, peer_benchmarks, label, data_quality };
+  return { classification, assets, valuation, macro, scores, peer_benchmarks, label, data_quality };
 }
 
 // --- Helper functions ---
@@ -371,7 +377,7 @@ function makeMacroScore(raw: { z_score: number | null; percentile: number | null
 
 function adaptMacroPanel(rc: RawCountry): MacroPanel {
   const panel = rc.macro_panel || {};
-  const na: MacroIndicator = { value: null, available: false, z_score: null, percentile: null, source: 'Not available', last_updated: null };
+  const na: MacroIndicator = { value: null, available: false, z_score: null, percentile: null, source: 'Not available', last_updated: null, own_history_z: null, peer_z: null, composite_z: null, scoring_method: null };
 
   function toIndicator(cat: string, field: string): MacroIndicator {
     const raw = panel[cat]?.[field];
@@ -383,6 +389,10 @@ function adaptMacroPanel(rc: RawCountry): MacroPanel {
       percentile: raw.percentile,
       source: raw.source || 'World Bank',
       last_updated: raw.last_updated,
+      own_history_z: raw.own_history_z ?? null,
+      peer_z: raw.peer_z ?? null,
+      composite_z: raw.composite_z ?? null,
+      scoring_method: raw.scoring_method ?? null,
     };
   }
 
@@ -451,6 +461,24 @@ function makeScore(z: number | null, avail: number, total: number): CategoryScor
   };
 }
 
+function adaptValuation(raw: any): ValuationData {
+  if (!raw?.available) {
+    return { available: false, pe_ratio: null, pb_ratio: null, dividend_yield: null, earnings_yield: null, beta: null, aum: null, valuation_z: null, valuation_percentile: null, note: null };
+  }
+  return {
+    available: true,
+    pe_ratio: raw.pe_ratio ?? null,
+    pb_ratio: raw.pb_ratio ?? null,
+    dividend_yield: raw.dividend_yield ?? null,
+    earnings_yield: raw.pe_ratio ? parseFloat((1 / raw.pe_ratio * 100).toFixed(2)) : null,
+    beta: raw.beta ?? null,
+    aum: raw.aum ?? null,
+    valuation_z: raw.valuation_z ?? null,
+    valuation_percentile: raw.valuation_percentile ?? null,
+    note: raw.note ?? null,
+  };
+}
+
 function adaptEquity(raw: RawAssetBlock | undefined): EquityData {
   if (!raw?.available) {
     return { ticker: '', price: null, usd_return_1m: null, return_1m: null, return_3m: null, return_6m: null, return_12m: null, z_score: null, percentile: null, peer_relative: null };
@@ -472,7 +500,7 @@ function adaptEquity(raw: RawAssetBlock | undefined): EquityData {
 
 function adaptBond(raw: RawAssetBlock | undefined): BondData {
   if (!raw?.available) {
-    return { available: false, yield_10y: null, yield_change_1m: null, yield_change_3m: null, bond_etf: null, cds_spread: null, z_score: null, percentile: null, peer_relative: null };
+    return { available: false, yield_10y: null, yield_change_1m: null, yield_change_3m: null, bond_etf: null, cds_spread: null, sovereign_spread: null, spread_z_score: null, z_score: null, percentile: null, peer_relative: null };
   }
 
   // Check if this is a 10Y yield snapshot (no ETF metrics) or an ETF-based bond
@@ -486,6 +514,8 @@ function adaptBond(raw: RawAssetBlock | undefined): BondData {
     yield_change_3m: raw.returns?.['3M'] ? raw.returns['3M'] / 100 : (raw.yield_change_3m ?? null),
     bond_etf: raw.bond_proxy || null,
     cds_spread: null,
+    sovereign_spread: (raw as any).sovereign_spread ?? null,
+    spread_z_score: (raw as any).spread_z_score ?? null,
     z_score: z !== null ? parseFloat(z.toFixed(2)) : null,
     percentile: z !== null ? parseFloat((normalCDF(z) * 100).toFixed(1)) : null,
     peer_relative: null,
@@ -521,7 +551,8 @@ function adaptFingerprint(futures: Record<string, RawFuturesAsset>): GlobalFinge
     const m1w = raw.metrics?.['1M'];
     const z = m1w?.z_score ?? 0;
     const direction: 'up' | 'down' | 'flat' = z > 0.5 ? 'up' : z < -0.5 ? 'down' : 'flat';
-    return {
+    const positioning = (raw as any).positioning;
+    const asset: FuturesAsset = {
       name: raw.name || nameMap[ticker] || ticker,
       ticker,
       price: raw.last_price,
@@ -532,6 +563,13 @@ function adaptFingerprint(futures: Record<string, RawFuturesAsset>): GlobalFinge
       percentile: parseFloat((normalCDF(z) * 100).toFixed(1)),
       direction,
     };
+    if (positioning) {
+      asset.positioning = {
+        net_speculative: positioning.net_speculative ?? null,
+        report_date: positioning.report_date ?? null,
+      };
+    }
+    return asset;
   });
 
   // Detect regime

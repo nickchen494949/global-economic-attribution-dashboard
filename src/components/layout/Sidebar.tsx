@@ -12,6 +12,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     { path: '/peers', label: 'Peer Groups', icon: <PeersIcon /> },
     { path: '/fingerprint', label: 'Global Fingerprint', icon: <FingerprintIcon /> },
     { path: '/quality', label: 'Data Quality', icon: <QualityIcon /> },
+    { path: '/backtest', label: 'Backtest', icon: <BacktestIcon /> },
   ]
 
   return (
@@ -95,6 +96,15 @@ function QualityIcon() {
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 3v12h12" />
       <path d="M7 11V8M10 11V6M13 11V4" />
+    </svg>
+  )
+}
+
+function BacktestIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2 14l4-4 3 3 7-7" />
+      <path d="M12 6h4v4" />
     </svg>
   )
 }

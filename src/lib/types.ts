@@ -53,6 +53,21 @@ export interface CountryClassification {
   external_vulnerability: ExternalVulnerability;
 }
 
+// ---- Valuation Data ----
+
+export interface ValuationData {
+  available: boolean;
+  pe_ratio: number | null;
+  pb_ratio: number | null;
+  dividend_yield: number | null;
+  earnings_yield: number | null;
+  beta: number | null;
+  aum: number | null;
+  valuation_z: number | null;
+  valuation_percentile: number | null;
+  note: string | null;
+}
+
 // ---- Asset Data ----
 
 export interface ReturnData {
@@ -78,6 +93,8 @@ export interface BondData {
   yield_change_3m: number | null;
   bond_etf: string | null;
   cds_spread: number | null;
+  sovereign_spread: number | null;
+  spread_z_score: number | null;
   z_score: number | null;
   percentile: number | null;
   peer_relative: number | null;
@@ -103,6 +120,10 @@ export interface MacroIndicator {
   percentile: number | null;
   source: string;
   last_updated: string | null;
+  own_history_z: number | null;
+  peer_z: number | null;
+  composite_z: number | null;
+  scoring_method: string | null;
 }
 
 export interface GrowthData {
@@ -246,6 +267,10 @@ export interface FuturesAsset {
   z_score: number | null;
   percentile: number | null;
   direction: 'up' | 'down' | 'flat';
+  positioning?: {
+    net_speculative: number | null;
+    report_date: string | null;
+  };
 }
 
 export type MarketRegime =
@@ -287,6 +312,7 @@ export interface DataQuality {
 export interface CountryData {
   classification: CountryClassification;
   assets: AssetPanel;
+  valuation: ValuationData;
   macro: MacroPanel;
   scores: CountryScores;
   peer_benchmarks: Record<PeerDimension, PeerBenchmark>;

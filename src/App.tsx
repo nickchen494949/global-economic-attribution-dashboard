@@ -6,6 +6,7 @@ import { CountryDetailPage } from './components/country/CountryDetailPage'
 import { PeerGroupPage } from './components/peers/PeerGroupPage'
 import { FingerprintPage } from './components/fingerprint/FingerprintPage'
 import { DataQualityPage } from './components/quality/DataQualityPage'
+import { BacktestPage } from './components/backtest/BacktestPage'
 import { useDashboardData } from './hooks/useDashboardData'
 
 const REFRESH_INTERVAL_SEC = 300; // 5 minutes
@@ -118,6 +119,7 @@ function App() {
           <Route path="/peers" element={<PeerGroupPage data={data} />} />
           <Route path="/fingerprint" element={<FingerprintPage data={data} />} />
           <Route path="/quality" element={<DataQualityPage data={data} />} />
+          <Route path="/backtest" element={<BacktestPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

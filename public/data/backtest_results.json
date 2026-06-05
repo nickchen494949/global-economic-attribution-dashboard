@@ -1,0 +1,10 @@
+{
+  "status": "insufficient_data",
+  "months_available": 1,
+  "months_needed": 3,
+  "message": "Need at least 3 months of data. Currently have 1 month(s).",
+  "snapshots": [
+    "2026-06"
+  ],
+  "last_updated": "2026-06-05T04:24:20.378559Z"
+}
